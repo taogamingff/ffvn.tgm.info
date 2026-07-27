@@ -15,7 +15,7 @@
     <meta name="theme-color" content="#4a6bb5">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://tra-cuu-info.vercel.app/">
+    <link rel="canonical" href="https://infofftgm.vercel.app/">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.phototourl.com/free/2026-07-22-a87a09e5-ecab-46a2-8034-56cb8bcff4ed.jpg">
@@ -25,7 +25,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content="FFVN.TGM - Công Cụ Tra Cứu Thông Tin Free Fire">
     <meta property="og:description" content="FFVN.TGM - Công cụ tra cứu thông tin Free Fire chính xác. Tra cứu UID, xem rank, level, skin. Hỗ trợ 15 server.">
-    <meta property="og:url" content="https://tra-cuu-info.vercel.app/">
+    <meta property="og:url" content="https://infofftgm.vercel.app/">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://cdn.phototourl.com/free/2026-07-22-a87a09e5-ecab-46a2-8034-56cb8bcff4ed.jpg">
     <meta property="og:image:width" content="512">
@@ -45,14 +45,14 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "FFVN.TGM",
-        "url": "https://tra-cuu-info.vercel.app/",
+        "url": "https://infofftgm.vercel.app/",
         "description": "Công cụ tra cứu thông tin Free Fire chính xác",
         "applicationCategory": "UtilityApplication",
         "operatingSystem": "All",
         "author": {
             "@type": "Organization",
             "name": "FFVN.TGM",
-            "url": "https://tra-cuu-info.vercel.app/"
+            "url": "https://infofftgm.vercel.app/"
         }
     }
     </script>
@@ -221,6 +221,20 @@
         .live-dot { width: 10px; height: 10px; background: var(--success); border-radius: 50%; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
+        /* ===== STORAGE STATUS INDICATOR ===== */
+        .storage-indicator {
+            position: fixed; bottom: 20px; left: 20px; z-index: 9999;
+            background: var(--bg-card); padding: 10px 16px; border-radius: 20px;
+            border: 1px solid var(--border-color); font-family: 'Rajdhani', sans-serif;
+            font-size: 0.8rem; color: var(--text-muted); display: flex;
+            align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .storage-indicator:hover { border-color: var(--accent); }
+        .storage-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); }
+        .storage-dot.warning { background: var(--warning); animation: pulse 1s infinite; }
+        .storage-dot.danger { background: var(--danger); animation: pulse 0.5s infinite; }
+
         /* ===== HERO ===== */
         .hero-section { text-align: center; padding: 1rem 0 1.8rem; border-bottom: 2px solid var(--border-color); margin-bottom: 1.8rem; }
         .hero-logo { width: 80px; height: 80px; border-radius: 20px; object-fit: cover; background: #1e2535; padding: 6px; border: 2px solid var(--accent); box-shadow: 0 6px 20px rgba(74,107,181,0.4); margin-bottom: 1rem; }
@@ -349,6 +363,7 @@
             .stat-detail-grid { grid-template-columns: 1fr; }
             .sidebar-nav { width: 280px; right: -280px; }
             .hamburger-btn { top: 15px; right: 15px; width: 44px; height: 44px; }
+            .storage-indicator { bottom: 10px; left: 10px; font-size: 0.7rem; padding: 8px 12px; }
         }
 
         @media (max-width: 480px) {
@@ -406,6 +421,12 @@
             </div>
         </div>
     </nav>
+
+    <!-- ===== STORAGE STATUS INDICATOR ===== -->
+    <div class="storage-indicator" id="storageIndicator" title="Trạng thái bộ nhớ">
+        <span class="storage-dot" id="storageDot"></span>
+        <span id="storageText">Đang kiểm tra...</span>
+    </div>
 
     <!-- ===== MAIN CONTENT ===== -->
     <div class="main-content" id="mainContent">
@@ -559,18 +580,373 @@
 
     <script>
         (function() {
-            // ===== STORAGE KEY =====
-            const STORAGE_KEY = 'ffvn_tgm_stats';
+            // =============================================
+            // HỆ THỐNG LƯU TRỮ THÔNG MINH (SMART STORAGE)
+            // =============================================
+            class SmartStorage {
+                constructor() {
+                    this.primaryKey = 'ffvn_tgm_primary'; // Dữ liệu chính (thống kê)
+                    this.secondaryKey = 'ffvn_tgm_secondary'; // Dữ liệu phụ (cache, tạm)
+                    this.maxAgeDays = 60; // Tự động dọn dẹp dữ liệu > 60 ngày
+                    this.maxStorageSize = 4.5 * 1024 * 1024; // Giới hạn ~4.5MB (localStorage thường 5MB)
+                    this.cleanupInterval = 60 * 60 * 1000; // Kiểm tra dọn dẹp mỗi giờ
+                    
+                    this.init();
+                }
+
+                init() {
+                    console.log('🚀 Khởi tạo SmartStorage System...');
+                    this.performCleanup();
+                    this.updateStorageIndicator();
+                    
+                    // Tự động dọn dẹp định kỳ
+                    setInterval(() => {
+                        this.performCleanup();
+                        this.updateStorageIndicator();
+                    }, this.cleanupInterval);
+                    
+                    // Kiểm tra khi trang được focus lại
+                    window.addEventListener('focus', () => {
+                        this.performCleanup();
+                        this.updateStorageIndicator();
+                    });
+                }
+
+                // Tính kích thước dữ liệu
+                calculateSize(data) {
+                    try {
+                        const str = typeof data === 'string' ? data : JSON.stringify(data);
+                        return new Blob([str]).size;
+                    } catch {
+                        return 0;
+                    }
+                }
+
+                // Tính tổng kích thước localStorage đã sử dụng
+                getTotalStorageSize() {
+                    let total = 0;
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i);
+                        const value = localStorage.getItem(key);
+                        total += this.calculateSize(key) + this.calculateSize(value);
+                    }
+                    return total;
+                }
+
+                // Kiểm tra bộ nhớ có gần đầy không
+                isStorageNearFull() {
+                    const used = this.getTotalStorageSize();
+                    return used > this.maxStorageSize * 0.85; // 85% là gần đầy
+                }
+
+                // Kiểm tra bộ nhớ có đầy không
+                isStorageFull() {
+                    const used = this.getTotalStorageSize();
+                    return used > this.maxStorageSize;
+                }
+
+                // Lưu dữ liệu chính (ưu tiên cao - không bị xóa)
+                savePrimaryData(key, data) {
+                    try {
+                        let primaryData = this.getPrimaryData();
+                        
+                        primaryData[key] = {
+                            value: data,
+                            timestamp: Date.now(),
+                            priority: 'high',
+                            size: this.calculateSize(data)
+                        };
+                        
+                        // Nếu bộ nhớ gần đầy, dọn dẹp trước
+                        if (this.isStorageNearFull()) {
+                            console.warn('⚠️ Bộ nhớ gần đầy, đang tối ưu...');
+                            this.freeUpSpace();
+                        }
+                        
+                        const jsonStr = JSON.stringify(primaryData);
+                        localStorage.setItem(this.primaryKey, jsonStr);
+                        console.log(`✅ Đã lưu dữ liệu chính: ${key} (${this.formatSize(primaryData[key].size)})`);
+                        
+                        this.updateStorageIndicator();
+                        return true;
+                    } catch (error) {
+                        console.error('❌ Lỗi lưu dữ liệu chính:', error);
+                        
+                        // Nếu lỗi QuotaExceeded, thử dọn dẹp khẩn cấp
+                        if (error.name === 'QuotaExceededError') {
+                            console.warn('🆘 Bộ nhớ đầy! Đang dọn dẹp khẩn cấp...');
+                            this.emergencyCleanup();
+                            try {
+                                const jsonStr = JSON.stringify({ [key]: { value: data, timestamp: Date.now(), priority: 'high', size: this.calculateSize(data) } });
+                                localStorage.setItem(this.primaryKey, jsonStr);
+                                return true;
+                            } catch (e2) {
+                                console.error('❌ Không thể lưu ngay cả sau khi dọn dẹp khẩn cấp');
+                                return false;
+                            }
+                        }
+                        return false;
+                    }
+                }
+
+                // Lưu dữ liệu phụ (ưu tiên thấp - có thể bị xóa khi đầy)
+                saveSecondaryData(key, data) {
+                    try {
+                        let secondaryData = this.getSecondaryData();
+                        
+                        secondaryData[key] = {
+                            value: data,
+                            timestamp: Date.now(),
+                            priority: 'low',
+                            size: this.calculateSize(data)
+                        };
+                        
+                        // Nếu bộ nhớ gần đầy, xóa dữ liệu phụ cũ
+                        if (this.isStorageNearFull()) {
+                            console.warn('⚠️ Bộ nhớ gần đầy, xóa dữ liệu phụ cũ...');
+                            this.cleanSecondaryData();
+                        }
+                        
+                        const jsonStr = JSON.stringify(secondaryData);
+                        localStorage.setItem(this.secondaryKey, jsonStr);
+                        console.log(`📦 Đã lưu dữ liệu phụ: ${key} (${this.formatSize(secondaryData[key].size)})`);
+                        
+                        this.updateStorageIndicator();
+                        return true;
+                    } catch (error) {
+                        console.error('❌ Lỗi lưu dữ liệu phụ:', error);
+                        
+                        if (error.name === 'QuotaExceededError') {
+                            console.warn('🆘 Bộ nhớ đầy! Xóa toàn bộ dữ liệu phụ...');
+                            localStorage.removeItem(this.secondaryKey);
+                            try {
+                                const jsonStr = JSON.stringify({ [key]: { value: data, timestamp: Date.now(), priority: 'low', size: this.calculateSize(data) } });
+                                localStorage.setItem(this.secondaryKey, jsonStr);
+                                return true;
+                            } catch (e2) {
+                                return false;
+                            }
+                        }
+                        return false;
+                    }
+                }
+
+                // Lấy dữ liệu chính
+                getPrimaryData() {
+                    try {
+                        const data = localStorage.getItem(this.primaryKey);
+                        return data ? JSON.parse(data) : {};
+                    } catch {
+                        return {};
+                    }
+                }
+
+                // Lấy dữ liệu phụ
+                getSecondaryData() {
+                    try {
+                        const data = localStorage.getItem(this.secondaryKey);
+                        return data ? JSON.parse(data) : {};
+                    } catch {
+                        return {};
+                    }
+                }
+
+                // Lấy một mục dữ liệu chính
+                getPrimaryItem(key) {
+                    const data = this.getPrimaryData();
+                    return data[key] ? data[key].value : null;
+                }
+
+                // Lấy một mục dữ liệu phụ
+                getSecondaryItem(key) {
+                    const data = this.getSecondaryData();
+                    return data[key] ? data[key].value : null;
+                }
+
+                // Tự động dọn dẹp dữ liệu cũ (>60 ngày)
+                cleanOldData() {
+                    const now = Date.now();
+                    const maxAge = this.maxAgeDays * 24 * 60 * 60 * 1000;
+                    let cleanedCount = 0;
+                    
+                    // Dọn dẹp dữ liệu chính
+                    const primaryData = this.getPrimaryData();
+                    let primaryModified = false;
+                    Object.keys(primaryData).forEach(key => {
+                        if (primaryData[key].timestamp && (now - primaryData[key].timestamp) > maxAge) {
+                            delete primaryData[key];
+                            cleanedCount++;
+                            primaryModified = true;
+                        }
+                    });
+                    if (primaryModified) {
+                        localStorage.setItem(this.primaryKey, JSON.stringify(primaryData));
+                        console.log(`🧹 Đã xóa ${cleanedCount} mục dữ liệu chính cũ (>${this.maxAgeDays} ngày)`);
+                    }
+                    
+                    // Dọn dẹp dữ liệu phụ
+                    const secondaryData = this.getSecondaryData();
+                    let secondaryModified = false;
+                    let secondaryCleaned = 0;
+                    Object.keys(secondaryData).forEach(key => {
+                        if (secondaryData[key].timestamp && (now - secondaryData[key].timestamp) > maxAge) {
+                            delete secondaryData[key];
+                            secondaryCleaned++;
+                            secondaryModified = true;
+                        }
+                    });
+                    if (secondaryModified) {
+                        localStorage.setItem(this.secondaryKey, JSON.stringify(secondaryData));
+                        console.log(`🧹 Đã xóa ${secondaryCleaned} mục dữ liệu phụ cũ (>${this.maxAgeDays} ngày)`);
+                    }
+                    
+                    return cleanedCount + secondaryCleaned;
+                }
+
+                // Xóa dữ liệu phụ để giữ dữ liệu chính
+                cleanSecondaryData() {
+                    const secondaryData = this.getSecondaryData();
+                    const entries = Object.entries(secondaryData);
+                    
+                    if (entries.length === 0) return 0;
+                    
+                    // Sắp xếp theo thời gian cũ nhất
+                    entries.sort((a, b) => a[1].timestamp - b[1].timestamp);
+                    
+                    // Xóa 50% dữ liệu phụ cũ nhất
+                    const removeCount = Math.max(1, Math.floor(entries.length * 0.5));
+                    const cleaned = {};
+                    let cleanedCount = 0;
+                    
+                    for (let i = removeCount; i < entries.length; i++) {
+                        cleaned[entries[i][0]] = entries[i][1];
+                    }
+                    cleanedCount = removeCount;
+                    
+                    localStorage.setItem(this.secondaryKey, JSON.stringify(cleaned));
+                    console.log(`🧹 Đã xóa ${cleanedCount} mục dữ liệu phụ để giải phóng bộ nhớ`);
+                    
+                    return cleanedCount;
+                }
+
+                // Giải phóng không gian khi đầy
+                freeUpSpace() {
+                    let freed = 0;
+                    
+                    // Bước 1: Dọn dẹp dữ liệu cũ
+                    freed += this.cleanOldData();
+                    
+                    // Bước 2: Nếu vẫn đầy, xóa dữ liệu phụ
+                    if (this.isStorageNearFull()) {
+                        freed += this.cleanSecondaryData();
+                    }
+                    
+                    // Bước 3: Nếu vẫn đầy, xóa toàn bộ dữ liệu phụ
+                    if (this.isStorageFull()) {
+                        localStorage.removeItem(this.secondaryKey);
+                        console.warn('🆘 Đã xóa toàn bộ dữ liệu phụ để bảo vệ dữ liệu chính!');
+                        freed += 1;
+                    }
+                    
+                    this.updateStorageIndicator();
+                    return freed;
+                }
+
+                // Dọn dẹp khẩn cấp (khi QuotaExceededError)
+                emergencyCleanup() {
+                    console.warn('🚨 DỌN DẸP KHẨN CẤP!');
+                    
+                    // Xóa toàn bộ dữ liệu phụ
+                    localStorage.removeItem(this.secondaryKey);
+                    
+                    // Giữ lại dữ liệu chính nhưng xóa các mục cũ
+                    const primaryData = this.getPrimaryData();
+                    const now = Date.now();
+                    const recentThreshold = 7 * 24 * 60 * 60 * 1000; // 7 ngày
+                    
+                    const recentData = {};
+                    Object.keys(primaryData).forEach(key => {
+                        if (primaryData[key].timestamp && (now - primaryData[key].timestamp) < recentThreshold) {
+                            recentData[key] = primaryData[key];
+                        }
+                    });
+                    
+                    localStorage.setItem(this.primaryKey, JSON.stringify(recentData));
+                    console.log('🆘 Đã giữ lại dữ liệu chính trong 7 ngày gần nhất');
+                    
+                    this.updateStorageIndicator();
+                }
+
+                // Thực hiện dọn dẹp định kỳ
+                performCleanup() {
+                    const cleanedCount = this.cleanOldData();
+                    if (this.isStorageNearFull()) {
+                        this.freeUpSpace();
+                    }
+                    this.updateStorageIndicator();
+                    return cleanedCount;
+                }
+
+                // Cập nhật chỉ báo trạng thái bộ nhớ
+                updateStorageIndicator() {
+                    const dot = document.getElementById('storageDot');
+                    const text = document.getElementById('storageText');
+                    if (!dot || !text) return;
+                    
+                    const used = this.getTotalStorageSize();
+                    const usedMB = (used / (1024 * 1024)).toFixed(2);
+                    const percent = ((used / this.maxStorageSize) * 100).toFixed(1);
+                    
+                    dot.classList.remove('warning', 'danger');
+                    
+                    if (used > this.maxStorageSize * 0.9) {
+                        dot.classList.add('danger');
+                        text.textContent = `⚠️ Đầy: ${usedMB}MB (${percent}%)`;
+                    } else if (used > this.maxStorageSize * 0.7) {
+                        dot.classList.add('warning');
+                        text.textContent = `⚡ ${usedMB}MB / 4.5MB (${percent}%)`;
+                    } else {
+                        text.textContent = `💾 ${usedMB}MB / 4.5MB (${percent}%)`;
+                    }
+                }
+
+                // Format kích thước
+                formatSize(bytes) {
+                    if (bytes < 1024) return bytes + ' B';
+                    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+                    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+                }
+
+                // Lấy thông tin trạng thái
+                getStatus() {
+                    return {
+                        totalSize: this.getTotalStorageSize(),
+                        maxSize: this.maxStorageSize,
+                        usagePercent: ((this.getTotalStorageSize() / this.maxStorageSize) * 100).toFixed(1),
+                        primaryItems: Object.keys(this.getPrimaryData()).length,
+                        secondaryItems: Object.keys(this.getSecondaryData()).length,
+                        isNearFull: this.isStorageNearFull(),
+                        isFull: this.isStorageFull()
+                    };
+                }
+            }
+
+            // Khởi tạo SmartStorage
+            const smartStorage = new SmartStorage();
+            
+            // Export ra global scope
+            window.smartStorage = smartStorage;
+            
+            // ===== STORAGE KEY cho thống kê (tương thích với code cũ) =====
+            const STATS_STORAGE_KEY = 'ffvn_tgm_stats';
             
             // ===== AUTO-DETECT & TRACK =====
-            // Hệ thống tự động nhận dạng người dùng qua fingerprint đơn giản
             function generateVisitorFingerprint() {
                 const screenInfo = `${window.screen.width}x${window.screen.height}x${window.screen.colorDepth}`;
                 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
                 const language = navigator.language;
                 const platform = navigator.platform;
                 const raw = `${screenInfo}|${timeZone}|${language}|${platform}`;
-                // Hash đơn giản
                 let hash = 0;
                 for (let i = 0; i < raw.length; i++) {
                     const char = raw.charCodeAt(i);
@@ -602,7 +978,7 @@
                     last30DaysViews: 0,
                     onlineNow: 0,
                     lastUpdated: now.toISOString(),
-                    visitorFingerprints: {}, // Lưu fingerprint để đếm unique chính xác
+                    visitorFingerprints: {},
                     visitorHistory: {},
                     topPosts: [
                         { title: '🏆 Hướng dẫn Free Fire', views: 0 },
@@ -615,13 +991,25 @@
                 };
             }
 
-            // ===== LOAD STATS =====
+            // ===== LOAD STATS (sử dụng SmartStorage) =====
             function loadStats() {
                 try {
-                    const stored = localStorage.getItem(STORAGE_KEY);
+                    // Thử lấy từ SmartStorage trước
+                    const smartData = smartStorage.getPrimaryItem('statistics');
+                    if (smartData) {
+                        return { ...getDefaultStats(), ...smartData };
+                    }
+                    
+                    // Fallback: đọc trực tiếp từ localStorage
+                    const stored = localStorage.getItem(STATS_STORAGE_KEY);
                     if (stored) {
                         const parsed = JSON.parse(stored);
-                        return { ...getDefaultStats(), ...parsed };
+                        const merged = { ...getDefaultStats(), ...parsed };
+                        // Di chuyển sang SmartStorage
+                        smartStorage.savePrimaryData('statistics', merged);
+                        // Xóa key cũ để tiết kiệm không gian
+                        localStorage.removeItem(STATS_STORAGE_KEY);
+                        return merged;
                     }
                 } catch (e) {
                     console.error('Lỗi đọc dữ liệu thống kê:', e);
@@ -629,26 +1017,27 @@
                 return getDefaultStats();
             }
 
-            // ===== SAVE STATS =====
+            // ===== SAVE STATS (sử dụng SmartStorage) =====
             function saveStats(stats) {
                 try {
                     stats.lastUpdated = new Date().toISOString();
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
+                    
+                    // Sử dụng SmartStorage để lưu
+                    const saved = smartStorage.savePrimaryData('statistics', stats);
+                    
+                    // Fallback: lưu trực tiếp nếu SmartStorage thất bại
+                    if (!saved) {
+                        localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(stats));
+                    }
+                    
+                    // Cập nhật chỉ báo bộ nhớ
+                    smartStorage.updateStorageIndicator();
                 } catch (e) {
                     console.error('Lỗi lưu dữ liệu thống kê:', e);
-                    if (e.name === 'QuotaExceededError') {
-                        stats.visitorHistory = {};
-                        stats.visitorFingerprints = {};
-                        try {
-                            localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
-                        } catch (e2) {
-                            console.error('Không thể lưu dữ liệu');
-                        }
-                    }
                 }
             }
 
-            // ===== AUTO TRACK PAGE VIEW (Tự động nhận dạng) =====
+            // ===== AUTO TRACK PAGE VIEW =====
             function autoTrackPageView() {
                 const stats = loadStats();
                 const now = new Date();
@@ -682,7 +1071,7 @@
                 const quarterKey = 'Q' + quarter;
                 stats.yearlyViews[yearKey][quarterKey] = (stats.yearlyViews[yearKey][quarterKey] || 0) + 1;
                 
-                // AUTO-DETECT UNIQUE VISITOR bằng fingerprint
+                // AUTO-DETECT UNIQUE VISITOR
                 if (!stats.visitorFingerprints) stats.visitorFingerprints = {};
                 const isNewVisitor = !stats.visitorFingerprints[visitorFingerprint];
                 if (isNewVisitor) {
@@ -697,10 +1086,12 @@
                     stats.visitorFingerprints[visitorFingerprint].visitCount += 1;
                 }
                 
-                // Dọn dẹp fingerprint cũ (30 ngày)
-                const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString();
+                // Dọn dẹp fingerprint cũ (>60 ngày - đồng bộ với SmartStorage)
+                const maxAge = 60 * 24 * 60 * 60 * 1000;
+                const cutoffTime = now.getTime() - maxAge;
                 Object.keys(stats.visitorFingerprints).forEach(fp => {
-                    if (stats.visitorFingerprints[fp].lastSeen < thirtyDaysAgo) {
+                    const lastSeen = new Date(stats.visitorFingerprints[fp].lastSeen).getTime();
+                    if (lastSeen < cutoffTime) {
                         delete stats.visitorFingerprints[fp];
                     }
                 });
@@ -709,7 +1100,7 @@
                 stats.last7DaysViews = calculateViewsInRange(stats.dailyViews, 7);
                 stats.last30DaysViews = calculateViewsInRange(stats.dailyViews, 30);
                 
-                // Cập nhật top posts ngẫu nhiên
+                // Cập nhật top posts
                 stats.topPosts.forEach((post) => {
                     if (Math.random() < 0.3) {
                         post.views += Math.floor(Math.random() * 3) + 1;
@@ -717,19 +1108,43 @@
                 });
                 
                 // Dọn dẹp daily views (giữ 60 ngày)
-                const sixtyDaysAgo = new Date(now.getTime() - 60 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                const sixtyDaysAgo = new Date(now.getTime() - maxAge).toISOString().split('T')[0];
                 Object.keys(stats.dailyViews).forEach(date => {
                     if (date < sixtyDaysAgo) delete stats.dailyViews[date];
                 });
                 
+                // Lưu cache API vào secondary storage
+                cacheApiResponseToSecondary();
+                
                 saveStats(stats);
                 
-                // Cập nhật hiển thị nếu đang ở trang thống kê
+                // Cập nhật hiển thị
                 if (document.getElementById('page-statistics').classList.contains('active')) {
                     renderStatistics(stats);
                 }
                 
+                // Hiển thị trạng thái storage
+                console.log('📊 SmartStorage Status:', smartStorage.getStatus());
+                
                 return stats;
+            }
+
+            // Cache API response vào secondary storage
+            function cacheApiResponseToSecondary() {
+                try {
+                    const currentData = window._currentApiData;
+                    if (currentData) {
+                        const cacheKey = `api_cache_${currentData.uid}_${currentData.region}`;
+                        smartStorage.saveSecondaryData(cacheKey, {
+                            data: currentData.data,
+                            uid: currentData.uid,
+                            region: currentData.region,
+                            cachedAt: Date.now()
+                        });
+                    }
+                } catch (e) {
+                    // Bỏ qua lỗi cache
+                }
             }
 
             // ===== CALCULATE VIEWS IN RANGE =====
@@ -743,12 +1158,11 @@
                 return total;
             }
 
-            // ===== LIVE ONLINE COUNTER (Tự động nhận dạng người đang xem) =====
+            // ===== LIVE ONLINE COUNTER =====
             const onlineTimestamps = [];
             
             function updateOnlineCount() {
                 const now = Date.now();
-                // Xóa timestamp cũ hơn 5 phút
                 while (onlineTimestamps.length > 0 && onlineTimestamps[0] < now - 5 * 60 * 1000) {
                     onlineTimestamps.shift();
                 }
@@ -756,16 +1170,13 @@
                 const count = onlineTimestamps.length;
                 document.getElementById('liveViewCount').textContent = count;
                 
-                // Lưu vào stats
                 const stats = loadStats();
                 stats.onlineNow = count;
                 saveStats(stats);
             }
             
-            // Cập nhật mỗi 3 giây
             setInterval(updateOnlineCount, 3000);
             
-            // Giả lập thêm người dùng online ngẫu nhiên
             function simulateOnlineUsers() {
                 const randomExtra = Math.floor(Math.random() * 5) + 1;
                 for (let i = 0; i < randomExtra; i++) {
@@ -780,7 +1191,6 @@
                 const now = new Date();
                 const today = now.toISOString().split('T')[0];
                 
-                // Summary cards
                 const summaryHTML = `
                     <div class="stat-card">
                         <div class="stat-card-icon">📈</div>
@@ -809,13 +1219,11 @@
                 `;
                 document.getElementById('statSummaryCards').innerHTML = summaryHTML;
 
-                // Detail grid
                 const maxMonthly = Math.max(...Object.values(stats.monthlyViews), 1);
                 const currentYear = String(now.getFullYear());
                 const yearData = stats.yearlyViews[currentYear] || { Q1: 0, Q2: 0, Q3: 0, Q4: 0 };
                 const maxQuarterly = Math.max(yearData.Q1, yearData.Q2, yearData.Q3, yearData.Q4, 1);
                 
-                // Lấy 7 tháng gần nhất
                 const recentMonths = [];
                 for (let i = 6; i >= 0; i--) {
                     const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
@@ -884,7 +1292,6 @@
                 `;
                 document.getElementById('statDetailGrid').innerHTML = detailHTML;
                 
-                // Cập nhật thời gian
                 document.getElementById('statLastUpdate').textContent = 
                     '🕒 Cập nhật: ' + now.toLocaleTimeString('vi-VN') + ' - ' + now.toLocaleDateString('vi-VN');
             }
@@ -893,6 +1300,7 @@
             window.refreshStatisticsDisplay = function() {
                 const stats = loadStats();
                 renderStatistics(stats);
+                smartStorage.updateStorageIndicator();
             };
 
             // ===== INTRO =====
@@ -910,10 +1318,16 @@
                     // Cập nhật online count
                     updateOnlineCount();
                     
-                    // Hiển thị thống kê nếu đang ở trang đó
+                    // Hiển thị thống kê
                     if (document.getElementById('page-statistics').classList.contains('active')) {
                         renderStatistics(stats);
                     }
+                    
+                    // Cập nhật storage indicator
+                    smartStorage.updateStorageIndicator();
+                    
+                    // Log trạng thái
+                    console.log('✅ SmartStorage đã sẵn sàng:', smartStorage.getStatus());
                 }, 2800);
             });
 
@@ -954,6 +1368,7 @@
                 if (page === 'statistics') {
                     const stats = loadStats();
                     renderStatistics(stats);
+                    smartStorage.updateStorageIndicator();
                 }
                 
                 closeSidebar();
@@ -1116,12 +1531,36 @@
                 jsonOutput.innerHTML = '<div class="loading">⏳ Đang tải dữ liệu ...</div>';
                 translateBtn.disabled = true; copyBtn.disabled = true;
                 regionInfoBox.style.display = 'none';
+                
+                // Kiểm tra cache trong secondary storage
+                const cacheKey = `api_cache_${uid}_${region}`;
+                const cachedData = smartStorage.getSecondaryItem(cacheKey);
+                if (cachedData && (Date.now() - cachedData.cachedAt) < 30 * 60 * 1000) { // Cache 30 phút
+                    console.log('📦 Sử dụng dữ liệu cache từ SmartStorage');
+                    currentData = cachedData.data;
+                    displayData(currentData, false);
+                    updateRegionInfo(currentData, region);
+                    translateBtn.disabled = false;
+                    translateBtn.textContent = '🌐 Dịch sang tiếng Việt';
+                    return;
+                }
+                
                 try {
                     const res = await fetch(buildApiUrl(uid, region));
                     if (!res.ok) throw new Error(res.status === 404 ? 'Không tìm thấy dữ liệu.' : `Lỗi kết nối (Mã: ${res.status})`);
                     const data = await res.json();
                     if (!data || Object.keys(data).length === 0) throw new Error('Không tìm thấy thông tin.');
                     currentData = data;
+                    
+                    // Lưu cache
+                    window._currentApiData = { uid, region, data };
+                    smartStorage.saveSecondaryData(cacheKey, {
+                        data: data,
+                        uid: uid,
+                        region: region,
+                        cachedAt: Date.now()
+                    });
+                    
                     displayData(data, false);
                     updateRegionInfo(data, region);
                     translateBtn.disabled = false;
@@ -1194,16 +1633,34 @@
             fetchIconBtn.addEventListener('click', handleIconSearch);
             iconInput.addEventListener('keypress', e => { if (e.key === 'Enter') { e.preventDefault(); handleIconSearch(); } });
 
+            // Storage indicator click event
+            document.getElementById('storageIndicator').addEventListener('click', () => {
+                const status = smartStorage.getStatus();
+                const info = `
+🧹 Dọn dẹp dữ liệu cũ...
+📊 Trạng thái hiện tại:
+- Dung lượng: ${smartStorage.formatSize(status.totalSize)} / ${smartStorage.formatSize(status.maxSize)}
+- Sử dụng: ${status.usagePercent}%
+- Dữ liệu chính: ${status.primaryItems} mục
+- Dữ liệu phụ: ${status.secondaryItems} mục
+                `.trim();
+                
+                const cleaned = smartStorage.performCleanup();
+                showToast(`✅ Đã dọn dẹp ${cleaned} mục dữ liệu cũ!`);
+                console.log(info);
+            });
+
             // Auto load
             setTimeout(() => {
                 fetchData(uidInput.value.trim() || '26408047', regionSelect.value);
                 displayIcon(iconInput.value.trim() || '710049012');
                 
-                // Hiển thị thống kê ban đầu
                 const stats = loadStats();
                 if (document.getElementById('page-statistics').classList.contains('active')) {
                     renderStatistics(stats);
                 }
+                
+                smartStorage.updateStorageIndicator();
             }, 3000);
 
             // Tự động refresh thống kê mỗi 30 giây
@@ -1214,16 +1671,31 @@
                 }
             }, 30000);
 
-            // ===== TRACK PAGE VIEW khi người dùng chuyển trang =====
-            // Sử dụng Visibility API để track khi user quay lại tab
+            // ===== TRACK PAGE VIEW khi chuyển trang hoặc focus =====
             document.addEventListener('visibilitychange', () => {
                 if (document.visibilityState === 'visible') {
                     autoTrackPageView();
                     updateOnlineCount();
+                    smartStorage.updateStorageIndicator();
                 }
             });
+
+            // ===== DỌN DẸP ĐỊNH KỲ (mỗi 30 phút) =====
+            setInterval(() => {
+                smartStorage.performCleanup();
+            }, 30 * 60 * 1000);
+
+            // Log trạng thái khởi tạo
+            console.log('🎯 Hệ thống SmartStorage đã được tích hợp thành công!');
+            console.log('📋 Tính năng:');
+            console.log('  ✅ Lưu trữ dữ liệu trong localStorage');
+            console.log('  ✅ Tự động dọn dẹp dữ liệu cũ (>60 ngày)');
+            console.log('  ✅ Tự động xóa dữ liệu phụ khi đầy bộ nhớ');
+            console.log('  ✅ Bảo vệ dữ liệu chính (thống kê)');
+            console.log('  ✅ Cache API response (30 phút)');
+            console.log('  ✅ Chỉ báo trạng thái bộ nhớ');
 
         })();
     </script>
 </body>
-  </html>
+    </html>
