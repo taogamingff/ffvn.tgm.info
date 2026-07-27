@@ -18,16 +18,16 @@
     <link rel="canonical" href="https://infofftgm.vercel.app/">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.phototourl.com/free/2026-07-22-a87a09e5-ecab-46a2-8034-56cb8bcff4ed.jpg">
-    <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://cdn.phototourl.com/free/2026-07-22-a87a09e5-ecab-46a2-8034-56cb8bcff4ed.jpg">
-    <link rel="apple-touch-icon" href="https://cdn.phototourl.com/free/2026-07-22-a87a09e5-ecab-46a2-8034-56cb8bcff4ed.jpg">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg">
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg">
+    <link rel="apple-touch-icon" href="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg">
     
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:title" content="FFVN.TGM - Công Cụ Tra Cứu Thông Tin Free Fire">
     <meta property="og:description" content="FFVN.TGM - Công cụ tra cứu thông tin Free Fire chính xác. Tra cứu UID, xem rank, level, skin. Hỗ trợ 15 server.">
     <meta property="og:url" content="https://infofftgm.vercel.app/">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://cdn.phototourl.com/free/2026-07-22-a87a09e5-ecab-46a2-8034-56cb8bcff4ed.jpg">
+    <meta property="og:image" content="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta property="og:site_name" content="FFVN.TGM">
@@ -37,9 +37,9 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="FFVN.TGM - Công Cụ Tra Cứu Thông Tin Free Fire">
     <meta name="twitter:description" content="FFVN.TGM - Công cụ tra cứu thông tin Free Fire chính xác. Tra cứu UID, xem rank, level, skin.">
-    <meta name="twitter:image" content="https://cdn.phototourl.com/free/2026-07-22-a87a09e5-ecab-46a2-8034-56cb8bcff4ed.jpg">
+    <meta name="twitter:image" content="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg">
     
-    <!-- Schema.org Structured Data -->
+    <!-- Schema.org -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -82,21 +82,17 @@
             --success: #34a76e;
             --danger: #d45a6a;
             --warning: #f5b87e;
+            --orange: #ff8c42;
+            --gold: #ffcc00;
             --gradient-1: linear-gradient(135deg, #b7c9f0 0%, #5f7fc9 100%);
             --gradient-2: linear-gradient(145deg, #4a6bb5, #2d4373);
             --gradient-success: linear-gradient(145deg, #2a8b5a, #1a5a3a);
             --gradient-purple: linear-gradient(145deg, #6b4aa5, #422d6e);
+            --gradient-ob: linear-gradient(135deg, #ff6b35, #ff4500, #cc0000);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Titillium Web', 'Exo 2', 'Rajdhani', 'Segoe UI', sans-serif;
@@ -164,23 +160,23 @@
         .sidebar-overlay.active { opacity: 1; visibility: visible; }
 
         .sidebar-nav {
-            position: fixed; top: 0; right: -350px; width: 320px; height: 100%;
+            position: fixed; top: 0; right: -380px; width: 350px; height: 100%;
             background: var(--bg-secondary); z-index: 9998;
             transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
             box-shadow: -10px 0 40px rgba(0,0,0,0.8); border-left: 2px solid var(--border-color);
-            overflow-y: auto; padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;
+            overflow-y: auto; padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1rem;
         }
         .sidebar-nav.active { right: 0; }
 
-        .sidebar-header { display: flex; align-items: center; gap: 12px; padding-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); }
+        .sidebar-header { display: flex; align-items: center; gap: 12px; padding-bottom: 1.2rem; border-bottom: 2px solid var(--border-color); }
         .sidebar-logo { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; border: 1px solid var(--accent); }
         .sidebar-brand { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-heading); letter-spacing: 1px; }
 
-        .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
         .sidebar-menu li a {
-            display: flex; align-items: center; gap: 12px; padding: 14px 18px;
-            border-radius: 14px; color: var(--text-secondary); text-decoration: none;
-            font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 1.05rem;
+            display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+            border-radius: 12px; color: var(--text-secondary); text-decoration: none;
+            font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.95rem;
             letter-spacing: 0.8px; transition: all 0.3s ease; border: 1px solid transparent;
             cursor: pointer;
         }
@@ -189,15 +185,21 @@
             color: var(--text-heading); transform: translateX(-4px);
             box-shadow: 0 4px 12px rgba(74,107,181,0.2);
         }
-        .sidebar-menu-icon { font-size: 1.3rem; width: 24px; text-align: center; flex-shrink: 0; }
+        .sidebar-menu-icon { font-size: 1.2rem; width: 22px; text-align: center; flex-shrink: 0; }
 
-        .sidebar-social { margin-top: auto; padding-top: 1.5rem; border-top: 2px solid var(--border-color); }
-        .sidebar-social h4 { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; letter-spacing: 1px; }
+        .sidebar-section-title {
+            font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: var(--warning);
+            letter-spacing: 1.5px; text-transform: uppercase; padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-light); margin-top: 0.5rem;
+        }
+
+        .sidebar-social { margin-top: auto; padding-top: 1.2rem; border-top: 2px solid var(--border-color); }
+        .sidebar-social h4 { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; letter-spacing: 1px; }
         .sidebar-social-item {
-            display: flex; align-items: center; gap: 10px; padding: 10px 14px;
-            border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border-light);
-            margin-bottom: 0.5rem; transition: all 0.3s ease; text-decoration: none; color: var(--text-secondary);
-            font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.95rem;
+            display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+            border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border-light);
+            margin-bottom: 0.4rem; transition: all 0.3s ease; text-decoration: none; color: var(--text-secondary);
+            font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.85rem;
         }
         .sidebar-social-item:hover { border-color: var(--accent); background: var(--bg-tertiary); transform: translateX(-2px); }
         .sidebar-social-item.tiktok { border-left: 3px solid #ff0050; }
@@ -210,7 +212,6 @@
         .navbar-title { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: 2px; color: var(--text-heading); text-transform: uppercase; }
         .navbar-subtitle { font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); letter-spacing: 1px; }
 
-        /* ===== LIVE VIEW COUNTER ===== */
         .live-counter {
             display: flex; align-items: center; gap: 8px;
             background: var(--bg-card); padding: 8px 16px; border-radius: 30px;
@@ -221,7 +222,6 @@
         .live-dot { width: 10px; height: 10px; background: var(--success); border-radius: 50%; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-        /* ===== STORAGE STATUS INDICATOR ===== */
         .storage-indicator {
             position: fixed; bottom: 20px; left: 20px; z-index: 9999;
             background: var(--bg-card); padding: 10px 16px; border-radius: 20px;
@@ -240,6 +240,10 @@
         .hero-logo { width: 80px; height: 80px; border-radius: 20px; object-fit: cover; background: #1e2535; padding: 6px; border: 2px solid var(--accent); box-shadow: 0 6px 20px rgba(74,107,181,0.4); margin-bottom: 1rem; }
         .hero-title { font-family: 'Orbitron', sans-serif; font-size: 2.8rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 3px; text-transform: uppercase; }
         .hero-description { font-size: 1rem; color: var(--text-muted); margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+        .hero-creator { font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); margin-top: 0.8rem; letter-spacing: 1px; text-shadow: 0 0 20px rgba(255,204,0,0.4); }
+        .hero-tiktok { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #ff0050, #000000); color: white; padding: 8px 20px; border-radius: 30px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; margin-top: 0.8rem; transition: all 0.3s ease; border: 1px solid #ff0050; }
+        .hero-tiktok:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,0,80,0.4); }
+        .hero-uid { display: inline-block; background: var(--bg-card); color: var(--text-heading); padding: 8px 20px; border-radius: 30px; font-family: 'Chakra Petch', monospace; font-weight: 700; font-size: 0.95rem; margin-top: 0.5rem; border: 1px solid var(--accent); letter-spacing: 1px; }
 
         /* ===== SECTION STYLES ===== */
         .section-container { margin-bottom: 2rem; }
@@ -248,7 +252,7 @@
         .collapse-icon { font-size: 1.5rem; color: var(--text-heading); transition: transform 0.3s ease; }
         .collapse-icon.open { transform: rotate(180deg); }
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
-        .collapsible-content.show { max-height: 3000px; padding-top: 1rem; padding-bottom: 0.5rem; }
+        .collapsible-content.show { max-height: 5000px; padding-top: 1rem; padding-bottom: 0.5rem; }
 
         /* ===== SERVER SELECTOR ===== */
         .server-section { background: var(--bg-tertiary); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--border-color); }
@@ -260,6 +264,47 @@
         .server-name { font-weight: 700; }
         .server-region { font-size: 0.7rem; color: var(--text-muted); display: block; }
 
+        /* ===== VQ SECTION ===== */
+        .vq-section { background: var(--bg-tertiary); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--border-color); }
+        .vq-card { background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 16px; padding: 1.2rem; border: 1px solid var(--border-light); margin-bottom: 0.8rem; transition: all 0.3s ease; }
+        .vq-card:hover { border-color: var(--accent); transform: translateX(-4px); }
+        .vq-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 0.8rem; }
+        .vq-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; }
+        .vq-icon.fw { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+        .vq-icon.tw { background: linear-gradient(135deg, #feca57, #ff9f43); }
+        .vq-icon.dw { background: linear-gradient(135deg, #54a0ff, #5f27cd); }
+        .vq-name { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-heading); }
+        .vq-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* ===== OB UPDATE SECTION ===== */
+        .ob-section { background: var(--bg-tertiary); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--border-color); }
+        .ob-logo-container { text-align: center; margin-bottom: 1.5rem; }
+        .ob-logo { max-width: 200px; height: auto; filter: drop-shadow(0 0 20px rgba(255,107,53,0.4)); }
+        .ob-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .ob-card { background: linear-gradient(135deg, #1a0a00, #2a1010); border-radius: 16px; padding: 1.2rem; border: 1px solid #3a1a1a; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .ob-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--gradient-ob); }
+        .ob-card:hover { border-color: #ff4500; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(255,69,0,0.2); }
+        .ob-card.released { opacity: 0.5; border-color: var(--border-color); }
+        .ob-card.released::before { background: var(--success); }
+        .ob-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+        .ob-name { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 800; color: #ff6b35; letter-spacing: 1px; }
+        .ob-status { font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px; }
+        .ob-status.upcoming { background: #ff4500; color: white; }
+        .ob-status.counting { background: var(--warning); color: #1a0a00; animation: pulse 1.5s infinite; }
+        .ob-status.released-status { background: var(--success); color: white; }
+        .ob-date { font-family: 'Chakra Petch', monospace; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .ob-countdown { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--warning); text-shadow: 0 0 10px rgba(245,184,126,0.5); margin-top: 0.5rem; }
+        .ob-note { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; padding: 10px; background: #1a1a2e; border-radius: 10px; border-left: 3px solid var(--warning); font-style: italic; }
+
+        /* ===== TIMEZONE TABLE ===== */
+        .timezone-section { background: var(--bg-tertiary); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--border-color); }
+        .timezone-table { width: 100%; border-collapse: collapse; font-family: 'Rajdhani', sans-serif; }
+        .timezone-table th { background: var(--bg-dark); color: var(--warning); padding: 12px 16px; text-align: left; font-weight: 700; letter-spacing: 1px; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid var(--border-color); }
+        .timezone-table td { padding: 10px 16px; border-bottom: 1px solid var(--border-light); color: var(--text-secondary); font-weight: 500; }
+        .timezone-table tr:hover td { background: #1e2a40; }
+        .timezone-flag { font-size: 1.2rem; margin-right: 8px; }
+        .timezone-icon { font-size: 1rem; margin-right: 8px; }
+
         /* ===== STATISTICS SECTION ===== */
         .statistics-section { background: var(--bg-tertiary); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--border-color); }
         .stat-summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
@@ -270,7 +315,6 @@
         .stat-card-label { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
         .stat-card-trend { font-size: 0.8rem; margin-top: 0.3rem; font-weight: 600; }
         .stat-card-trend.up { color: var(--success); }
-        .stat-card-trend.down { color: var(--danger); }
         .stat-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
         .stat-detail-card { background: var(--bg-card); border-radius: 16px; padding: 1.2rem; border: 1px solid var(--border-light); }
         .stat-detail-card h4 { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: var(--text-heading); margin-bottom: 1rem; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
@@ -295,9 +339,9 @@
         .btn-3d:hover { background: linear-gradient(145deg, var(--accent-hover), #3a5290); box-shadow: 0 12px 28px rgba(74,107,181,0.6), 0 6px 0 var(--accent-dark), 0 10px 20px rgba(0,0,0,0.4); transform: translateY(-3px); }
         .btn-3d:active { transform: translateY(2px); box-shadow: 0 4px 10px rgba(74,107,181,0.4), 0 2px 0 var(--accent-dark); }
         .btn-3d-secondary { background: var(--gradient-success); box-shadow: 0 8px 20px rgba(42,139,90,0.4), 0 4px 0 #0f331f, 0 6px 10px rgba(0,0,0,0.3); }
-        .btn-3d-secondary:hover { background: linear-gradient(145deg, #34a76e, #226e48); box-shadow: 0 12px 28px rgba(42,139,90,0.6), 0 6px 0 #0f331f; }
+        .btn-3d-secondary:hover { background: linear-gradient(145deg, #34a76e, #226e48); }
         .btn-3d-tertiary { background: var(--gradient-purple); box-shadow: 0 8px 20px rgba(107,74,165,0.4), 0 4px 0 #241745, 0 6px 10px rgba(0,0,0,0.3); }
-        .btn-3d-tertiary:hover { background: linear-gradient(145deg, #7f5fc9, #553a8a); box-shadow: 0 12px 28px rgba(107,74,165,0.6), 0 6px 0 #241745; }
+        .btn-3d-tertiary:hover { background: linear-gradient(145deg, #7f5fc9, #553a8a); }
         .btn-3d:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
         .btn-sm { padding: 8px 20px; font-size: 0.85rem; }
 
@@ -334,7 +378,6 @@
         /* ===== TOAST ===== */
         .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--success); color: white; padding: 12px 28px; border-radius: 40px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 1px; z-index: 10001; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; box-shadow: 0 8px 24px rgba(0,0,0,0.4); text-transform: uppercase; }
         .toast.show { opacity: 1; visibility: visible; }
-
         .hidden-url { display: none; }
 
         /* ===== PAGE SECTIONS ===== */
@@ -361,14 +404,13 @@
             .server-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
             .stat-summary-cards { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
             .stat-detail-grid { grid-template-columns: 1fr; }
-            .sidebar-nav { width: 280px; right: -280px; }
-            .hamburger-btn { top: 15px; right: 15px; width: 44px; height: 44px; }
-            .storage-indicator { bottom: 10px; left: 10px; font-size: 0.7rem; padding: 8px 12px; }
+            .ob-grid { grid-template-columns: 1fr; }
+            .sidebar-nav { width: 300px; right: -300px; }
+            .timezone-table { font-size: 0.8rem; }
+            .timezone-table th, .timezone-table td { padding: 8px 10px; }
         }
 
         @media (max-width: 480px) {
-            .stat-card-value { font-size: 1.4rem; }
-            .server-btn { padding: 10px 12px; font-size: 0.85rem; }
             .sidebar-nav { width: 100%; right: -100%; }
         }
     </style>
@@ -377,10 +419,10 @@
     <!-- ===== INTRO ===== -->
     <div class="intro-screen" id="introScreen">
         <div class="intro-logo-container">
-            <img src="https://cdn.phototourl.com/free/2026-07-22-a87a09e5-ecab-46a2-8034-56cb8bcff4ed.jpg" alt="FFVN.TGM Logo" class="intro-logo">
+            <img src="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg" alt="FFVN.TGM Logo" class="intro-logo">
         </div>
         <h1 class="intro-title">FFVN.TGM</h1>
-        <p class="intro-subtitle">Xem Thông Tin Người Dùng Free Fire!</p>
+        <p class="intro-subtitle">Thành Thanh Cua</p>
         <div class="intro-loading-bar"><div class="intro-loading-fill"></div></div>
     </div>
 
@@ -397,7 +439,7 @@
     <!-- ===== SIDEBAR NAVIGATION ===== -->
     <nav class="sidebar-nav" id="sidebarNav">
         <div class="sidebar-header">
-            <img src="https://cdn.phototourl.com/free/2026-07-22-a87a09e5-ecab-46a2-8034-56cb8bcff4ed.jpg" alt="FFVN.TGM" class="sidebar-logo">
+            <img src="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg" alt="FFVN.TGM" class="sidebar-logo">
             <span class="sidebar-brand">FFVN.TGM</span>
         </div>
         <ul class="sidebar-menu">
@@ -407,17 +449,40 @@
             <li><a href="#" onclick="navigateTo('statistics')" data-nav="statistics">
                 <span class="sidebar-menu-icon">📊</span> Thống Kê Chi Tiết
             </a></li>
+            
+            <!-- ===== TÌM HIỂU VQ ===== -->
+            <div class="sidebar-section-title">🎡 Tìm Hiểu VQ</div>
+            <li><a href="#" onclick="navigateTo('vq-info')" data-nav="vq-info">
+                <span class="sidebar-menu-icon">🔴</span> FW - Vòng Quay Bay Màu
+            </a></li>
+            <li><a href="#" onclick="navigateTo('vq-info')" data-nav="vq-info">
+                <span class="sidebar-menu-icon">🟡</span> TW - Vòng Quay Tổ Ong
+            </a></li>
+            <li><a href="#" onclick="navigateTo('vq-info')" data-nav="vq-info">
+                <span class="sidebar-menu-icon">🟣</span> DW - Vòng Quay Kho Báu
+            </a></li>
+            
+            <!-- ===== CẬP NHẬT OB ===== -->
+            <div class="sidebar-section-title">🔄 CẬP NHẬT OB Free Fire</div>
+            <li><a href="#" onclick="navigateTo('ob-update')" data-nav="ob-update">
+                <span class="sidebar-menu-icon">📦</span> OB55 - OB61
+            </a></li>
+            
+            <!-- ===== MÚI GIỜ ===== -->
+            <li><a href="#" onclick="navigateTo('ob-update')" data-nav="ob-update">
+                <span class="sidebar-menu-icon">🕐</span> Giờ Địa Phương
+            </a></li>
         </ul>
         <div class="sidebar-social">
             <h4>🔗 KẾT NỐI</h4>
-            <a href="https://www.tiktok.com/@taogamingffvn" target="_blank" rel="noopener noreferrer" class="sidebar-social-item tiktok">
-                <span>🎵</span> TikTok: @taogamingffvn
+            <a href="https://www.tiktok.com/@thanhcuas1" target="_blank" rel="noopener noreferrer" class="sidebar-social-item tiktok">
+                <span>🎵</span> TikTok: @thanhcuas1
             </a>
             <div class="sidebar-social-item ff-account">
-                <span>🎮</span> Acc Free Fire: FFVN.TGM
+                <span>🎮</span> Nickname: @thanhcua
             </div>
             <div class="sidebar-social-item ff-account" style="margin-top: 0.3rem;">
-                <span>🆔</span> UID: 12334445856
+                <span>🆔</span> UID: 202417222
             </div>
         </div>
     </nav>
@@ -436,10 +501,10 @@
             <!-- ===== NAVBAR ===== -->
             <div class="navbar">
                 <div class="navbar-brand">
-                    <img src="https://cdn.phototourl.com/free/2026-07-22-a87a09e5-ecab-46a2-8034-56cb8bcff4ed.jpg" alt="FFVN.TGM Logo" class="navbar-logo" loading="lazy">
+                    <img src="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg" alt="FFVN.TGM Logo" class="navbar-logo" loading="lazy">
                     <div>
                         <div class="navbar-title">FFVN.TGM</div>
-                        <div class="navbar-subtitle">Tra cứu thông tin</div>
+                        <div class="navbar-subtitle">Thành Thanh Cua</div>
                     </div>
                 </div>
                 <div class="live-counter">
@@ -450,17 +515,22 @@
 
             <!-- ===== HERO ===== -->
             <div class="hero-section">
-                <img src="https://cdn.phototourl.com/free/2026-07-22-a87a09e5-ecab-46a2-8034-56cb8bcff4ed.jpg" alt="FFVN.TGM Logo Hero" class="hero-logo" loading="lazy">
+                <img src="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg" alt="FFVN.TGM Logo Hero" class="hero-logo" loading="lazy">
                 <h1 class="hero-title">FFVN.TGM</h1>
-                <p class="hero-description">
-                    Công Cụ Tra Cứu Thông Tin chính xác 89%, tra cứu thông tin nhanh chóng và nhiều server khác nhau mỗi lần tìm, và có nút dịch tiếng Việt cho bạn dễ hiểu.
-                </p>
+                <div class="hero-creator">👑 Thành Thanh Cua</div>
+                <a href="https://www.tiktok.com/@thanhcuas1" target="_blank" rel="noopener noreferrer" class="hero-tiktok">🎵 TikTok: @thanhcuas1</a>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <span class="hero-uid">👤 @thanhcua</span>
+                    <span class="hero-uid">🆔 UID: 202417222</span>
+                </div>
+                <p class="hero-description">Công Cụ Tra Cứu Thông Tin chính xác 89%, tra cứu thông tin nhanh chóng và nhiều server khác nhau mỗi lần tìm, và có nút dịch tiếng Việt cho bạn dễ hiểu.</p>
             </div>
 
             <!-- ============================================ -->
             <!-- PAGE: XEM THÔNG TIN FREE FIRE -->
             <!-- ============================================ -->
             <div class="page-section active" id="page-ff-info">
+                <!-- Phần còn lại giữ nguyên như code cũ -->
                 <!-- 15 Server -->
                 <div class="section-container server-section">
                     <div class="section-header" onclick="toggleCollapse('serverList')">
@@ -492,7 +562,7 @@
                 <div class="search-box">
                     <div class="input-group">
                         <label for="uidInput">👤 UID</label>
-                        <input type="text" id="uidInput" placeholder="Nhập UID ... (VD: 12334445856)" value="12334445856">
+                        <input type="text" id="uidInput" placeholder="Nhập UID ... (VD: 202417222)" value="202417222">
                         <button class="btn-3d" id="fetchBtn">🔍 Tra cứu</button>
                     </div>
                     <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-top: 0.2rem;">
@@ -566,11 +636,153 @@
                             <span class="stat-last-update" id="statLastUpdate">🕒 Đang tải...</span>
                             <button class="btn-3d btn-sm" onclick="refreshStatisticsDisplay()">🔄 Làm mới</button>
                         </div>
-                        <div class="stat-summary-cards" id="statSummaryCards">
+                        <div class="stat-summary-cards" id="statSummaryCards"></div>
+                        <div class="stat-detail-grid" id="statDetailGrid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PAGE: TÌM HIỂU VQ -->
+            <!-- ============================================ -->
+            <div class="page-section" id="page-vq-info">
+                <div class="vq-section">
+                    <div class="section-header" onclick="toggleCollapse('vqContent')">
+                        <h3>🎡 TÌM HIỂU VÒNG QUAY FREE FIRE</h3>
+                        <span class="collapse-icon open" id="vqContentIcon">▼</span>
+                    </div>
+                    <div class="collapsible-content show" id="vqContent">
+                        <!-- FW - Vòng Quay Bay Màu -->
+                        <div class="vq-card">
+                            <div class="vq-card-header">
+                                <div class="vq-icon fw">FW</div>
+                                <div>
+                                    <div class="vq-name">FW - Vòng Quay Bay Màu</div>
+                                    <small style="color: #ff6b6b;">Faded Wheel</small>
+                                </div>
+                            </div>
+                            <div class="vq-desc">
+                                <p>🔴 <strong>FW (Faded Wheel)</strong> là vòng quay may mắn phổ biến nhất trong Free Fire. Người chơi sử dụng kim cương để quay và nhận các phần thưởng ngẫu nhiên.</p>
+                                <p style="margin-top: 0.5rem;">📌 <strong>Đặc điểm:</strong></p>
+                                <ul style="margin-left: 1.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                                    <li>Giá mỗi lượt quay tăng dần</li>
+                                    <li>Có thể xóa 2 vật phẩm không mong muốn</li>
+                                    <li>Phần thưởng chính thường là Bundle hoặc Skin súng</li>
+                                    <li>Thời gian: Thường xuất hiện vào các sự kiện lớn</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- TW - Vòng Quay Tổ Ong -->
+                        <div class="vq-card">
+                            <div class="vq-card-header">
+                                <div class="vq-icon tw">TW</div>
+                                <div>
+                                    <div class="vq-name">TW - Vòng Quay Tổ Ong</div>
+                                    <small style="color: #feca57;">Triple Wheel / Honeycomb Wheel</small>
+                                </div>
+                            </div>
+                            <div class="vq-desc">
+                                <p>🟡 <strong>TW (Triple Wheel)</strong> hay còn gọi là Vòng Quay Tổ Ong, có cấu trúc dạng lưới tổ ong với nhiều ô phần thưởng.</p>
+                                <p style="margin-top: 0.5rem;">📌 <strong>Đặc điểm:</strong></p>
+                                <ul style="margin-left: 1.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                                    <li>Cấu trúc tổ ong 9-12 ô</li>
+                                    <li>Mỗi ô chứa 3 vật phẩm khác nhau</li>
+                                    <li>Có thể chọn 1 trong 3 vật phẩm mỗi ô</li>
+                                    <li>Tỉ lệ ra vật phẩm hiếm cao hơn FW</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- DW - Vòng Quay Kho Báu -->
+                        <div class="vq-card">
+                            <div class="vq-card-header">
+                                <div class="vq-icon dw">DW</div>
+                                <div>
+                                    <div class="vq-name">DW - Vòng Quay Kho Báu</div>
+                                    <small style="color: #54a0ff;">Diamond Wheel / Treasure Wheel</small>
+                                </div>
+                            </div>
+                            <div class="vq-desc">
+                                <p>🟣 <strong>DW (Diamond Wheel)</strong> là vòng quay kho báu với cơ hội nhận được các vật phẩm cực hiếm và giá trị cao.</p>
+                                <p style="margin-top: 0.5rem;">📌 <strong>Đặc điểm:</strong></p>
+                                <ul style="margin-left: 1.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                                    <li>Phần thưởng giá trị cao nhất</li>
+                                    <li>Thường có giới hạn số lượng</li>
+                                    <li>Có thể chứa vật phẩm LIMITED</li>
+                                    <li>Giá mỗi lượt quay thường cố định</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PAGE: CẬP NHẬT OB FREE FIRE -->
+            <!-- ============================================ -->
+            <div class="page-section" id="page-ob-update">
+                <div class="ob-section">
+                    <div class="ob-logo-container">
+                        <img src="https://dl.dir.freefiremobile.com/common/web_event/official2/dist/client/img/full_logo.969f536.png" alt="Free Fire Logo" class="ob-logo" onerror="this.style.display='none'">
+                        <h3 style="font-family: 'Orbitron', sans-serif; color: #ff6b35; margin-top: 0.5rem; font-size: 1.3rem;">🔄 CẬP NHẬT OB FREE FIRE</h3>
+                    </div>
+
+                    <div class="section-header" onclick="toggleCollapse('obContent')">
+                        <h3>📦 Lịch Dự Đoán Cập Nhật OB</h3>
+                        <span class="collapse-icon open" id="obContentIcon">▼</span>
+                    </div>
+                    <div class="collapsible-content show" id="obContent">
+                        <div class="ob-grid" id="obGrid">
                             <!-- Generated by JS -->
                         </div>
-                        <div class="stat-detail-grid" id="statDetailGrid">
-                            <!-- Generated by JS -->
+                        <div class="ob-note">
+                            ⚠️ <strong>Lưu ý:</strong> Đây là thông tin <strong>Dự Đoán</strong> thông tin Cập nhật OB Free Fire, xem tham khảo thôi nhé!
+                        </div>
+                    </div>
+
+                    <!-- ===== TIMEZONE TABLE ===== -->
+                    <div class="timezone-section" style="margin-top: 2rem;">
+                        <div class="section-header" onclick="toggleCollapse('timezoneContent')">
+                            <h3>🕐 Giờ Địa Phương Các Vùng</h3>
+                            <span class="collapse-icon open" id="timezoneContentIcon">▼</span>
+                        </div>
+                        <div class="collapsible-content show" id="timezoneContent">
+                            <div style="overflow-x: auto;">
+                                <table class="timezone-table">
+                                    <thead>
+                                        <tr>
+                                            <th>🇻🇳 Tên Vùng</th>
+                                            <th>🕐 Giờ Địa Phương</th>
+                                            <th>📋 Ghi Chú</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>🇮🇳 Ấn Độ</td><td>9:30 sáng</td><td>UTC+5:30</td></tr>
+                                        <tr><td>🇧🇩 Bangladesh</td><td>10:00 sáng</td><td>UTC+6</td></tr>
+                                        <tr><td>🇧🇷 Brazil</td><td>01:00 sáng</td><td>UTC-3 (Brasília)</td></tr>
+                                        <tr><td>🇹🇭 Thái Lan</td><td>10:00 sáng</td><td>UTC+7</td></tr>
+                                        <tr><td>🇸🇦 Ả Rập Xê Út</td><td>7:00 sáng</td><td>UTC+3</td></tr>
+                                        <tr><td>🇵🇰 Pakistan</td><td>9:00 sáng</td><td>UTC+5</td></tr>
+                                        <tr><td>🇳🇵 Nepal</td><td>9:45 sáng</td><td>UTC+5:45</td></tr>
+                                        <tr style="background: #1a2a10;"><td>🇻🇳 Việt Nam</td><td style="color: var(--success); font-weight: 700;">11:00 sáng ⭐</td><td>UTC+7 (Giờ Việt Nam)</td></tr>
+                                        <tr><td>🇸🇬 Singapore</td><td>12:00 trưa</td><td>UTC+8</td></tr>
+                                        <tr><td>🇮🇩 Indonesia</td><td>11:00 sáng</td><td>UTC+7 (WIB)</td></tr>
+                                        <tr><td>🇲🇦 Ma-rốc</td><td>5:00 sáng</td><td>UTC+1</td></tr>
+                                        <tr><td>🇷🇺 Nga</td><td>7:00 sáng</td><td>UTC+3 (Moscow)</td></tr>
+                                        <tr><td>🇲🇽 Mexico</td><td>10:00 sáng</td><td>UTC-6 (CDMX)</td></tr>
+                                        <tr><td>🇮🇹 Ý</td><td>6:00 sáng</td><td>UTC+2</td></tr>
+                                        <tr><td>🇦🇷 Argentina</td><td>01:00 sáng</td><td>UTC-3</td></tr>
+                                        <tr><td>🇹🇷 Thổ Nhĩ Kỳ</td><td>7:00 sáng</td><td>UTC+3</td></tr>
+                                        <tr><td>🇩🇿 Algeria</td><td>5:00 sáng</td><td>UTC+1</td></tr>
+                                        <tr><td>🇮🇷 Iran</td><td>7:30 sáng</td><td>UTC+3:30</td></tr>
+                                        <tr><td>🇰🇿 Kazakhstan</td><td>10:00 sáng</td><td>UTC+5</td></tr>
+                                        <tr><td>🇪🇬 Ai Cập</td><td>6:00 sáng</td><td>UTC+2</td></tr>
+                                        <tr><td>🇺🇿 Uzbekistan</td><td>9:00 sáng</td><td>UTC+5</td></tr>
+                                        <tr><td>🇨🇴 Colombia</td><td>--</td><td>UTC-5</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -581,48 +793,26 @@
     <script>
         (function() {
             // =============================================
-            // HỆ THỐNG LƯU TRỮ THÔNG MINH (SMART STORAGE)
+            // SMART STORAGE SYSTEM
             // =============================================
             class SmartStorage {
                 constructor() {
-                    this.primaryKey = 'ffvn_tgm_primary'; // Dữ liệu chính (thống kê)
-                    this.secondaryKey = 'ffvn_tgm_secondary'; // Dữ liệu phụ (cache, tạm)
-                    this.maxAgeDays = 60; // Tự động dọn dẹp dữ liệu > 60 ngày
-                    this.maxStorageSize = 4.5 * 1024 * 1024; // Giới hạn ~4.5MB (localStorage thường 5MB)
-                    this.cleanupInterval = 60 * 60 * 1000; // Kiểm tra dọn dẹp mỗi giờ
-                    
+                    this.primaryKey = 'ffvn_tgm_primary';
+                    this.secondaryKey = 'ffvn_tgm_secondary';
+                    this.maxAgeDays = 60;
+                    this.maxStorageSize = 4.5 * 1024 * 1024;
+                    this.cleanupInterval = 60 * 60 * 1000;
                     this.init();
                 }
-
                 init() {
-                    console.log('🚀 Khởi tạo SmartStorage System...');
                     this.performCleanup();
                     this.updateStorageIndicator();
-                    
-                    // Tự động dọn dẹp định kỳ
-                    setInterval(() => {
-                        this.performCleanup();
-                        this.updateStorageIndicator();
-                    }, this.cleanupInterval);
-                    
-                    // Kiểm tra khi trang được focus lại
-                    window.addEventListener('focus', () => {
-                        this.performCleanup();
-                        this.updateStorageIndicator();
-                    });
+                    setInterval(() => { this.performCleanup(); this.updateStorageIndicator(); }, this.cleanupInterval);
+                    window.addEventListener('focus', () => { this.performCleanup(); this.updateStorageIndicator(); });
                 }
-
-                // Tính kích thước dữ liệu
                 calculateSize(data) {
-                    try {
-                        const str = typeof data === 'string' ? data : JSON.stringify(data);
-                        return new Blob([str]).size;
-                    } catch {
-                        return 0;
-                    }
+                    try { const str = typeof data === 'string' ? data : JSON.stringify(data); return new Blob([str]).size; } catch { return 0; }
                 }
-
-                // Tính tổng kích thước localStorage đã sử dụng
                 getTotalStorageSize() {
                     let total = 0;
                     for (let i = 0; i < localStorage.length; i++) {
@@ -632,354 +822,222 @@
                     }
                     return total;
                 }
-
-                // Kiểm tra bộ nhớ có gần đầy không
-                isStorageNearFull() {
-                    const used = this.getTotalStorageSize();
-                    return used > this.maxStorageSize * 0.85; // 85% là gần đầy
-                }
-
-                // Kiểm tra bộ nhớ có đầy không
-                isStorageFull() {
-                    const used = this.getTotalStorageSize();
-                    return used > this.maxStorageSize;
-                }
-
-                // Lưu dữ liệu chính (ưu tiên cao - không bị xóa)
+                isStorageNearFull() { return this.getTotalStorageSize() > this.maxStorageSize * 0.85; }
+                isStorageFull() { return this.getTotalStorageSize() > this.maxStorageSize; }
                 savePrimaryData(key, data) {
                     try {
                         let primaryData = this.getPrimaryData();
-                        
-                        primaryData[key] = {
-                            value: data,
-                            timestamp: Date.now(),
-                            priority: 'high',
-                            size: this.calculateSize(data)
-                        };
-                        
-                        // Nếu bộ nhớ gần đầy, dọn dẹp trước
-                        if (this.isStorageNearFull()) {
-                            console.warn('⚠️ Bộ nhớ gần đầy, đang tối ưu...');
-                            this.freeUpSpace();
-                        }
-                        
-                        const jsonStr = JSON.stringify(primaryData);
-                        localStorage.setItem(this.primaryKey, jsonStr);
-                        console.log(`✅ Đã lưu dữ liệu chính: ${key} (${this.formatSize(primaryData[key].size)})`);
-                        
+                        primaryData[key] = { value: data, timestamp: Date.now(), priority: 'high', size: this.calculateSize(data) };
+                        if (this.isStorageNearFull()) this.freeUpSpace();
+                        localStorage.setItem(this.primaryKey, JSON.stringify(primaryData));
                         this.updateStorageIndicator();
                         return true;
                     } catch (error) {
-                        console.error('❌ Lỗi lưu dữ liệu chính:', error);
-                        
-                        // Nếu lỗi QuotaExceeded, thử dọn dẹp khẩn cấp
                         if (error.name === 'QuotaExceededError') {
-                            console.warn('🆘 Bộ nhớ đầy! Đang dọn dẹp khẩn cấp...');
                             this.emergencyCleanup();
                             try {
-                                const jsonStr = JSON.stringify({ [key]: { value: data, timestamp: Date.now(), priority: 'high', size: this.calculateSize(data) } });
-                                localStorage.setItem(this.primaryKey, jsonStr);
+                                localStorage.setItem(this.primaryKey, JSON.stringify({ [key]: { value: data, timestamp: Date.now(), priority: 'high', size: this.calculateSize(data) } }));
                                 return true;
-                            } catch (e2) {
-                                console.error('❌ Không thể lưu ngay cả sau khi dọn dẹp khẩn cấp');
-                                return false;
-                            }
+                            } catch (e2) { return false; }
                         }
                         return false;
                     }
                 }
-
-                // Lưu dữ liệu phụ (ưu tiên thấp - có thể bị xóa khi đầy)
                 saveSecondaryData(key, data) {
                     try {
                         let secondaryData = this.getSecondaryData();
-                        
-                        secondaryData[key] = {
-                            value: data,
-                            timestamp: Date.now(),
-                            priority: 'low',
-                            size: this.calculateSize(data)
-                        };
-                        
-                        // Nếu bộ nhớ gần đầy, xóa dữ liệu phụ cũ
-                        if (this.isStorageNearFull()) {
-                            console.warn('⚠️ Bộ nhớ gần đầy, xóa dữ liệu phụ cũ...');
-                            this.cleanSecondaryData();
-                        }
-                        
-                        const jsonStr = JSON.stringify(secondaryData);
-                        localStorage.setItem(this.secondaryKey, jsonStr);
-                        console.log(`📦 Đã lưu dữ liệu phụ: ${key} (${this.formatSize(secondaryData[key].size)})`);
-                        
+                        secondaryData[key] = { value: data, timestamp: Date.now(), priority: 'low', size: this.calculateSize(data) };
+                        if (this.isStorageNearFull()) this.cleanSecondaryData();
+                        localStorage.setItem(this.secondaryKey, JSON.stringify(secondaryData));
                         this.updateStorageIndicator();
                         return true;
                     } catch (error) {
-                        console.error('❌ Lỗi lưu dữ liệu phụ:', error);
-                        
                         if (error.name === 'QuotaExceededError') {
-                            console.warn('🆘 Bộ nhớ đầy! Xóa toàn bộ dữ liệu phụ...');
                             localStorage.removeItem(this.secondaryKey);
-                            try {
-                                const jsonStr = JSON.stringify({ [key]: { value: data, timestamp: Date.now(), priority: 'low', size: this.calculateSize(data) } });
-                                localStorage.setItem(this.secondaryKey, jsonStr);
-                                return true;
-                            } catch (e2) {
-                                return false;
-                            }
+                            try { localStorage.setItem(this.secondaryKey, JSON.stringify({ [key]: { value: data, timestamp: Date.now(), priority: 'low', size: this.calculateSize(data) } })); return true; } catch (e2) { return false; }
                         }
                         return false;
                     }
                 }
-
-                // Lấy dữ liệu chính
-                getPrimaryData() {
-                    try {
-                        const data = localStorage.getItem(this.primaryKey);
-                        return data ? JSON.parse(data) : {};
-                    } catch {
-                        return {};
-                    }
-                }
-
-                // Lấy dữ liệu phụ
-                getSecondaryData() {
-                    try {
-                        const data = localStorage.getItem(this.secondaryKey);
-                        return data ? JSON.parse(data) : {};
-                    } catch {
-                        return {};
-                    }
-                }
-
-                // Lấy một mục dữ liệu chính
-                getPrimaryItem(key) {
-                    const data = this.getPrimaryData();
-                    return data[key] ? data[key].value : null;
-                }
-
-                // Lấy một mục dữ liệu phụ
-                getSecondaryItem(key) {
-                    const data = this.getSecondaryData();
-                    return data[key] ? data[key].value : null;
-                }
-
-                // Tự động dọn dẹp dữ liệu cũ (>60 ngày)
+                getPrimaryData() { try { const data = localStorage.getItem(this.primaryKey); return data ? JSON.parse(data) : {}; } catch { return {}; } }
+                getSecondaryData() { try { const data = localStorage.getItem(this.secondaryKey); return data ? JSON.parse(data) : {}; } catch { return {}; } }
+                getPrimaryItem(key) { const data = this.getPrimaryData(); return data[key] ? data[key].value : null; }
+                getSecondaryItem(key) { const data = this.getSecondaryData(); return data[key] ? data[key].value : null; }
                 cleanOldData() {
                     const now = Date.now();
                     const maxAge = this.maxAgeDays * 24 * 60 * 60 * 1000;
-                    let cleanedCount = 0;
-                    
-                    // Dọn dẹp dữ liệu chính
-                    const primaryData = this.getPrimaryData();
-                    let primaryModified = false;
-                    Object.keys(primaryData).forEach(key => {
-                        if (primaryData[key].timestamp && (now - primaryData[key].timestamp) > maxAge) {
-                            delete primaryData[key];
-                            cleanedCount++;
-                            primaryModified = true;
-                        }
+                    let cleaned = 0;
+                    ['primary', 'secondary'].forEach(type => {
+                        const key = type === 'primary' ? this.primaryKey : this.secondaryKey;
+                        const getData = type === 'primary' ? this.getPrimaryData.bind(this) : this.getSecondaryData.bind(this);
+                        const data = getData();
+                        let modified = false;
+                        Object.keys(data).forEach(k => { if (data[k].timestamp && (now - data[k].timestamp) > maxAge) { delete data[k]; cleaned++; modified = true; } });
+                        if (modified) localStorage.setItem(key, JSON.stringify(data));
                     });
-                    if (primaryModified) {
-                        localStorage.setItem(this.primaryKey, JSON.stringify(primaryData));
-                        console.log(`🧹 Đã xóa ${cleanedCount} mục dữ liệu chính cũ (>${this.maxAgeDays} ngày)`);
-                    }
-                    
-                    // Dọn dẹp dữ liệu phụ
-                    const secondaryData = this.getSecondaryData();
-                    let secondaryModified = false;
-                    let secondaryCleaned = 0;
-                    Object.keys(secondaryData).forEach(key => {
-                        if (secondaryData[key].timestamp && (now - secondaryData[key].timestamp) > maxAge) {
-                            delete secondaryData[key];
-                            secondaryCleaned++;
-                            secondaryModified = true;
-                        }
-                    });
-                    if (secondaryModified) {
-                        localStorage.setItem(this.secondaryKey, JSON.stringify(secondaryData));
-                        console.log(`🧹 Đã xóa ${secondaryCleaned} mục dữ liệu phụ cũ (>${this.maxAgeDays} ngày)`);
-                    }
-                    
-                    return cleanedCount + secondaryCleaned;
+                    return cleaned;
                 }
-
-                // Xóa dữ liệu phụ để giữ dữ liệu chính
                 cleanSecondaryData() {
-                    const secondaryData = this.getSecondaryData();
-                    const entries = Object.entries(secondaryData);
-                    
+                    const data = this.getSecondaryData();
+                    const entries = Object.entries(data);
                     if (entries.length === 0) return 0;
-                    
-                    // Sắp xếp theo thời gian cũ nhất
                     entries.sort((a, b) => a[1].timestamp - b[1].timestamp);
-                    
-                    // Xóa 50% dữ liệu phụ cũ nhất
                     const removeCount = Math.max(1, Math.floor(entries.length * 0.5));
                     const cleaned = {};
-                    let cleanedCount = 0;
-                    
-                    for (let i = removeCount; i < entries.length; i++) {
-                        cleaned[entries[i][0]] = entries[i][1];
-                    }
-                    cleanedCount = removeCount;
-                    
+                    for (let i = removeCount; i < entries.length; i++) cleaned[entries[i][0]] = entries[i][1];
                     localStorage.setItem(this.secondaryKey, JSON.stringify(cleaned));
-                    console.log(`🧹 Đã xóa ${cleanedCount} mục dữ liệu phụ để giải phóng bộ nhớ`);
-                    
-                    return cleanedCount;
+                    return removeCount;
                 }
-
-                // Giải phóng không gian khi đầy
-                freeUpSpace() {
-                    let freed = 0;
-                    
-                    // Bước 1: Dọn dẹp dữ liệu cũ
-                    freed += this.cleanOldData();
-                    
-                    // Bước 2: Nếu vẫn đầy, xóa dữ liệu phụ
-                    if (this.isStorageNearFull()) {
-                        freed += this.cleanSecondaryData();
-                    }
-                    
-                    // Bước 3: Nếu vẫn đầy, xóa toàn bộ dữ liệu phụ
-                    if (this.isStorageFull()) {
-                        localStorage.removeItem(this.secondaryKey);
-                        console.warn('🆘 Đã xóa toàn bộ dữ liệu phụ để bảo vệ dữ liệu chính!');
-                        freed += 1;
-                    }
-                    
-                    this.updateStorageIndicator();
-                    return freed;
-                }
-
-                // Dọn dẹp khẩn cấp (khi QuotaExceededError)
+                freeUpSpace() { let freed = this.cleanOldData(); if (this.isStorageNearFull()) freed += this.cleanSecondaryData(); if (this.isStorageFull()) { localStorage.removeItem(this.secondaryKey); freed += 1; } this.updateStorageIndicator(); return freed; }
                 emergencyCleanup() {
-                    console.warn('🚨 DỌN DẸP KHẨN CẤP!');
-                    
-                    // Xóa toàn bộ dữ liệu phụ
                     localStorage.removeItem(this.secondaryKey);
-                    
-                    // Giữ lại dữ liệu chính nhưng xóa các mục cũ
                     const primaryData = this.getPrimaryData();
                     const now = Date.now();
-                    const recentThreshold = 7 * 24 * 60 * 60 * 1000; // 7 ngày
-                    
-                    const recentData = {};
-                    Object.keys(primaryData).forEach(key => {
-                        if (primaryData[key].timestamp && (now - primaryData[key].timestamp) < recentThreshold) {
-                            recentData[key] = primaryData[key];
-                        }
-                    });
-                    
-                    localStorage.setItem(this.primaryKey, JSON.stringify(recentData));
-                    console.log('🆘 Đã giữ lại dữ liệu chính trong 7 ngày gần nhất');
-                    
+                    const recent = {};
+                    Object.keys(primaryData).forEach(key => { if (primaryData[key].timestamp && (now - primaryData[key].timestamp) < 7 * 24 * 60 * 60 * 1000) recent[key] = primaryData[key]; });
+                    localStorage.setItem(this.primaryKey, JSON.stringify(recent));
                     this.updateStorageIndicator();
                 }
-
-                // Thực hiện dọn dẹp định kỳ
-                performCleanup() {
-                    const cleanedCount = this.cleanOldData();
-                    if (this.isStorageNearFull()) {
-                        this.freeUpSpace();
-                    }
-                    this.updateStorageIndicator();
-                    return cleanedCount;
-                }
-
-                // Cập nhật chỉ báo trạng thái bộ nhớ
+                performCleanup() { const cleaned = this.cleanOldData(); if (this.isStorageNearFull()) this.freeUpSpace(); this.updateStorageIndicator(); return cleaned; }
                 updateStorageIndicator() {
                     const dot = document.getElementById('storageDot');
                     const text = document.getElementById('storageText');
                     if (!dot || !text) return;
-                    
                     const used = this.getTotalStorageSize();
                     const usedMB = (used / (1024 * 1024)).toFixed(2);
                     const percent = ((used / this.maxStorageSize) * 100).toFixed(1);
-                    
                     dot.classList.remove('warning', 'danger');
-                    
-                    if (used > this.maxStorageSize * 0.9) {
-                        dot.classList.add('danger');
-                        text.textContent = `⚠️ Đầy: ${usedMB}MB (${percent}%)`;
-                    } else if (used > this.maxStorageSize * 0.7) {
-                        dot.classList.add('warning');
-                        text.textContent = `⚡ ${usedMB}MB / 4.5MB (${percent}%)`;
-                    } else {
-                        text.textContent = `💾 ${usedMB}MB / 4.5MB (${percent}%)`;
-                    }
+                    if (used > this.maxStorageSize * 0.9) { dot.classList.add('danger'); text.textContent = `⚠️ Đầy: ${usedMB}MB (${percent}%)`; }
+                    else if (used > this.maxStorageSize * 0.7) { dot.classList.add('warning'); text.textContent = `⚡ ${usedMB}MB / 4.5MB (${percent}%)`; }
+                    else { text.textContent = `💾 ${usedMB}MB / 4.5MB (${percent}%)`; }
                 }
-
-                // Format kích thước
-                formatSize(bytes) {
-                    if (bytes < 1024) return bytes + ' B';
-                    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-                    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
-                }
-
-                // Lấy thông tin trạng thái
-                getStatus() {
-                    return {
-                        totalSize: this.getTotalStorageSize(),
-                        maxSize: this.maxStorageSize,
-                        usagePercent: ((this.getTotalStorageSize() / this.maxStorageSize) * 100).toFixed(1),
-                        primaryItems: Object.keys(this.getPrimaryData()).length,
-                        secondaryItems: Object.keys(this.getSecondaryData()).length,
-                        isNearFull: this.isStorageNearFull(),
-                        isFull: this.isStorageFull()
-                    };
-                }
+                formatSize(bytes) { if (bytes < 1024) return bytes + ' B'; if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB'; return (bytes / (1024 * 1024)).toFixed(2) + ' MB'; }
+                getStatus() { return { totalSize: this.getTotalStorageSize(), maxSize: this.maxStorageSize, usagePercent: ((this.getTotalStorageSize() / this.maxStorageSize) * 100).toFixed(1), primaryItems: Object.keys(this.getPrimaryData()).length, secondaryItems: Object.keys(this.getSecondaryData()).length }; }
             }
 
-            // Khởi tạo SmartStorage
             const smartStorage = new SmartStorage();
-            
-            // Export ra global scope
             window.smartStorage = smartStorage;
-            
-            // ===== STORAGE KEY cho thống kê (tương thích với code cũ) =====
+
+            // =============================================
+            // OB UPDATE DATA
+            // =============================================
+            const obUpdates = [
+                { name: 'OB55', dateStr: '2026-09-09T04:00:00+07:00', status: 'counting' },
+                { name: 'OB56', dateStr: '2026-11-25T04:00:00+07:00', status: 'upcoming' },
+                { name: 'OB57', dateStr: '2027-02-10T04:00:00+07:00', status: 'upcoming' },
+                { name: 'OB58', dateStr: '2027-04-28T04:00:00+07:00', status: 'upcoming' },
+                { name: 'OB59', dateStr: '2027-07-14T04:00:00+07:00', status: 'upcoming' },
+                { name: 'OB60', dateStr: '2027-09-29T04:00:00+07:00', status: 'upcoming' },
+                { name: 'OB61', dateStr: '2027-12-15T04:00:00+07:00', status: 'upcoming' }
+            ];
+
+            function getOBStatus(obDate, now) {
+                const diff = obDate - now;
+                if (diff <= 0) return 'released';
+                if (diff < 30 * 24 * 60 * 60 * 1000) return 'counting';
+                return 'upcoming';
+            }
+
+            function formatCountdown(obDate, now) {
+                const diff = obDate - now;
+                if (diff <= 0) return '✅ Đã phát hành';
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                if (days > 0) return `${days} ngày ${hours}h ${minutes}p ${seconds}s`;
+                return `${hours}h ${minutes}p ${seconds}s`;
+            }
+
+            function getStatusClass(status) {
+                if (status === 'released') return 'released-status';
+                if (status === 'counting') return 'counting';
+                return 'upcoming';
+            }
+
+            function getStatusText(status) {
+                if (status === 'released') return '✅ Đã ra';
+                if (status === 'counting') return '⏳ Sắp ra';
+                return '📅 Sắp tới';
+            }
+
+            function formatDate(date) {
+                const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+                const months = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+                return `${days[date.getDay()]} Ngày ${date.getDate()} ${months[date.getMonth()]} Năm ${date.getFullYear()}`;
+            }
+
+            function renderOBUpdates() {
+                const now = new Date();
+                const obGrid = document.getElementById('obGrid');
+                if (!obGrid) return;
+                
+                let html = '';
+                obUpdates.forEach(ob => {
+                    const obDate = new Date(ob.dateStr);
+                    const status = getOBStatus(obDate, now);
+                    const countdown = formatCountdown(obDate, now);
+                    const statusClass = getStatusClass(status);
+                    const statusText = getStatusText(status);
+                    const dateFormatted = formatDate(obDate);
+                    const isReleased = status === 'released';
+                    
+                    html += `
+                        <div class="ob-card ${isReleased ? 'released' : ''}">
+                            <div class="ob-card-header">
+                                <span class="ob-name">${ob.name}</span>
+                                <span class="ob-status ${statusClass}">${statusText}</span>
+                            </div>
+                            <div class="ob-date">📅 ${dateFormatted}</div>
+                            <div class="ob-countdown" id="countdown-${ob.name}">${countdown}</div>
+                            <small style="color: var(--text-muted); display: block; margin-top: 0.3rem;">🕐 Dự kiến: 11:00 AM (Giờ VN)</small>
+                        </div>
+                    `;
+                });
+                
+                obGrid.innerHTML = html;
+            }
+
+            function updateOBCountdowns() {
+                const now = new Date();
+                obUpdates.forEach(ob => {
+                    const obDate = new Date(ob.dateStr);
+                    const countdown = formatCountdown(obDate, now);
+                    const el = document.getElementById('countdown-' + ob.name);
+                    if (el) el.textContent = countdown;
+                });
+            }
+
+            // =============================================
+            // STATISTICS FUNCTIONS
+            // =============================================
             const STATS_STORAGE_KEY = 'ffvn_tgm_stats';
             
-            // ===== AUTO-DETECT & TRACK =====
             function generateVisitorFingerprint() {
-                const screenInfo = `${window.screen.width}x${window.screen.height}x${window.screen.colorDepth}`;
-                const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                const language = navigator.language;
-                const platform = navigator.platform;
-                const raw = `${screenInfo}|${timeZone}|${language}|${platform}`;
+                const components = [
+                    window.screen.width + 'x' + window.screen.height + 'x' + window.screen.colorDepth,
+                    Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    navigator.language,
+                    navigator.platform,
+                    navigator.hardwareConcurrency || 'unknown',
+                    navigator.deviceMemory || 'unknown'
+                ];
+                const raw = components.join('|');
                 let hash = 0;
-                for (let i = 0; i < raw.length; i++) {
-                    const char = raw.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
-                    hash |= 0;
-                }
+                for (let i = 0; i < raw.length; i++) { hash = ((hash << 5) - hash) + raw.charCodeAt(i); hash |= 0; }
                 return 'fp_' + Math.abs(hash).toString(36);
             }
             
             const visitorFingerprint = generateVisitorFingerprint();
             
-            // ===== DEFAULT STATS STRUCTURE =====
             function getDefaultStats() {
                 const now = new Date();
-                const today = now.toISOString().split('T')[0];
-                const currentMonth = now.getMonth();
-                const currentYear = now.getFullYear();
-                const currentQuarter = Math.floor(currentMonth / 3) + 1;
-                
                 return {
-                    totalViews: 0,
-                    totalUniqueVisitors: 0,
-                    dailyViews: {},
-                    monthlyViews: {},
-                    yearlyViews: {},
-                    todayViews: 0,
-                    todayDate: today,
-                    last7DaysViews: 0,
-                    last30DaysViews: 0,
-                    onlineNow: 0,
-                    lastUpdated: now.toISOString(),
-                    visitorFingerprints: {},
-                    visitorHistory: {},
+                    totalViews: 0, totalUniqueVisitors: 0, dailyViews: {}, monthlyViews: {}, yearlyViews: {},
+                    todayViews: 0, todayDate: now.toISOString().split('T')[0], last7DaysViews: 0, last30DaysViews: 0,
+                    onlineNow: 0, lastUpdated: now.toISOString(), visitorFingerprints: {},
                     topPosts: [
                         { title: '🏆 Hướng dẫn Free Fire', views: 0 },
                         { title: '🥈 Code Free Fire mới', views: 0 },
@@ -987,57 +1045,32 @@
                         { title: '⭐ Skin mới ra mắt', views: 0 },
                         { title: '⭐ Sự kiện FF 2026', views: 0 }
                     ],
-                    version: '3.0'
+                    version: '4.0'
                 };
             }
 
-            // ===== LOAD STATS (sử dụng SmartStorage) =====
             function loadStats() {
                 try {
-                    // Thử lấy từ SmartStorage trước
                     const smartData = smartStorage.getPrimaryItem('statistics');
-                    if (smartData) {
-                        return { ...getDefaultStats(), ...smartData };
-                    }
-                    
-                    // Fallback: đọc trực tiếp từ localStorage
+                    if (smartData) return { ...getDefaultStats(), ...smartData };
                     const stored = localStorage.getItem(STATS_STORAGE_KEY);
                     if (stored) {
-                        const parsed = JSON.parse(stored);
-                        const merged = { ...getDefaultStats(), ...parsed };
-                        // Di chuyển sang SmartStorage
+                        const merged = { ...getDefaultStats(), ...JSON.parse(stored) };
                         smartStorage.savePrimaryData('statistics', merged);
-                        // Xóa key cũ để tiết kiệm không gian
                         localStorage.removeItem(STATS_STORAGE_KEY);
                         return merged;
                     }
-                } catch (e) {
-                    console.error('Lỗi đọc dữ liệu thống kê:', e);
-                }
+                } catch (e) {}
                 return getDefaultStats();
             }
 
-            // ===== SAVE STATS (sử dụng SmartStorage) =====
             function saveStats(stats) {
                 try {
                     stats.lastUpdated = new Date().toISOString();
-                    
-                    // Sử dụng SmartStorage để lưu
-                    const saved = smartStorage.savePrimaryData('statistics', stats);
-                    
-                    // Fallback: lưu trực tiếp nếu SmartStorage thất bại
-                    if (!saved) {
-                        localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(stats));
-                    }
-                    
-                    // Cập nhật chỉ báo bộ nhớ
-                    smartStorage.updateStorageIndicator();
-                } catch (e) {
-                    console.error('Lỗi lưu dữ liệu thống kê:', e);
-                }
+                    smartStorage.savePrimaryData('statistics', stats);
+                } catch (e) {}
             }
 
-            // ===== AUTO TRACK PAGE VIEW =====
             function autoTrackPageView() {
                 const stats = loadStats();
                 const now = new Date();
@@ -1046,260 +1079,110 @@
                 const yearKey = String(now.getFullYear());
                 const quarter = Math.floor(now.getMonth() / 3) + 1;
                 
-                // Reset todayViews nếu sang ngày mới
-                if (stats.todayDate !== today) {
-                    stats.todayViews = 0;
-                    stats.todayDate = today;
-                }
-                
-                // Tăng tổng lượt xem
-                stats.totalViews += 1;
-                stats.todayViews += 1;
-                
-                // Lưu theo ngày
+                if (stats.todayDate !== today) { stats.todayViews = 0; stats.todayDate = today; }
+                stats.totalViews += 1; stats.todayViews += 1;
                 if (!stats.dailyViews[today]) stats.dailyViews[today] = 0;
                 stats.dailyViews[today] += 1;
-                
-                // Lưu theo tháng
                 if (!stats.monthlyViews[monthKey]) stats.monthlyViews[monthKey] = 0;
                 stats.monthlyViews[monthKey] += 1;
+                if (!stats.yearlyViews[yearKey]) stats.yearlyViews[yearKey] = { Q1: 0, Q2: 0, Q3: 0, Q4: 0 };
+                stats.yearlyViews[yearKey]['Q' + quarter] = (stats.yearlyViews[yearKey]['Q' + quarter] || 0) + 1;
                 
-                // Lưu theo năm
-                if (!stats.yearlyViews[yearKey]) {
-                    stats.yearlyViews[yearKey] = { Q1: 0, Q2: 0, Q3: 0, Q4: 0 };
-                }
-                const quarterKey = 'Q' + quarter;
-                stats.yearlyViews[yearKey][quarterKey] = (stats.yearlyViews[yearKey][quarterKey] || 0) + 1;
-                
-                // AUTO-DETECT UNIQUE VISITOR
                 if (!stats.visitorFingerprints) stats.visitorFingerprints = {};
                 const isNewVisitor = !stats.visitorFingerprints[visitorFingerprint];
                 if (isNewVisitor) {
                     stats.totalUniqueVisitors += 1;
-                    stats.visitorFingerprints[visitorFingerprint] = {
-                        firstSeen: now.toISOString(),
-                        lastSeen: now.toISOString(),
-                        visitCount: 1
-                    };
+                    stats.visitorFingerprints[visitorFingerprint] = { firstSeen: now.toISOString(), lastSeen: now.toISOString(), visitCount: 1 };
                 } else {
                     stats.visitorFingerprints[visitorFingerprint].lastSeen = now.toISOString();
                     stats.visitorFingerprints[visitorFingerprint].visitCount += 1;
                 }
                 
-                // Dọn dẹp fingerprint cũ (>60 ngày - đồng bộ với SmartStorage)
                 const maxAge = 60 * 24 * 60 * 60 * 1000;
                 const cutoffTime = now.getTime() - maxAge;
                 Object.keys(stats.visitorFingerprints).forEach(fp => {
-                    const lastSeen = new Date(stats.visitorFingerprints[fp].lastSeen).getTime();
-                    if (lastSeen < cutoffTime) {
-                        delete stats.visitorFingerprints[fp];
-                    }
+                    if (new Date(stats.visitorFingerprints[fp].lastSeen).getTime() < cutoffTime) delete stats.visitorFingerprints[fp];
                 });
                 
-                // Tính lượt xem 7 ngày và 30 ngày
                 stats.last7DaysViews = calculateViewsInRange(stats.dailyViews, 7);
                 stats.last30DaysViews = calculateViewsInRange(stats.dailyViews, 30);
                 
-                // Cập nhật top posts
-                stats.topPosts.forEach((post) => {
-                    if (Math.random() < 0.3) {
-                        post.views += Math.floor(Math.random() * 3) + 1;
-                    }
-                });
+                stats.topPosts.forEach(post => { if (Math.random() < 0.3) post.views += Math.floor(Math.random() * 3) + 1; });
                 
-                // Dọn dẹp daily views (giữ 60 ngày)
-                const sixtyDaysAgo = new Date(now.getTime() - maxAge).toISOString().split('T')[0];
                 Object.keys(stats.dailyViews).forEach(date => {
-                    if (date < sixtyDaysAgo) delete stats.dailyViews[date];
+                    if (date < new Date(now.getTime() - maxAge).toISOString().split('T')[0]) delete stats.dailyViews[date];
                 });
-                
-                // Lưu cache API vào secondary storage
-                cacheApiResponseToSecondary();
                 
                 saveStats(stats);
-                
-                // Cập nhật hiển thị
-                if (document.getElementById('page-statistics').classList.contains('active')) {
+                if (document.getElementById('page-statistics') && document.getElementById('page-statistics').classList.contains('active')) {
                     renderStatistics(stats);
                 }
-                
-                // Hiển thị trạng thái storage
-                console.log('📊 SmartStorage Status:', smartStorage.getStatus());
-                
                 return stats;
             }
 
-            // Cache API response vào secondary storage
-            function cacheApiResponseToSecondary() {
-                try {
-                    const currentData = window._currentApiData;
-                    if (currentData) {
-                        const cacheKey = `api_cache_${currentData.uid}_${currentData.region}`;
-                        smartStorage.saveSecondaryData(cacheKey, {
-                            data: currentData.data,
-                            uid: currentData.uid,
-                            region: currentData.region,
-                            cachedAt: Date.now()
-                        });
-                    }
-                } catch (e) {
-                    // Bỏ qua lỗi cache
-                }
-            }
-
-            // ===== CALCULATE VIEWS IN RANGE =====
             function calculateViewsInRange(dailyViews, days) {
                 const now = new Date();
                 let total = 0;
                 for (let i = 0; i < days; i++) {
-                    const date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-                    total += dailyViews[date] || 0;
+                    total += dailyViews[new Date(now.getTime() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0]] || 0;
                 }
                 return total;
             }
 
-            // ===== LIVE ONLINE COUNTER =====
             const onlineTimestamps = [];
-            
             function updateOnlineCount() {
                 const now = Date.now();
-                while (onlineTimestamps.length > 0 && onlineTimestamps[0] < now - 5 * 60 * 1000) {
-                    onlineTimestamps.shift();
-                }
+                while (onlineTimestamps.length > 0 && onlineTimestamps[0] < now - 5 * 60 * 1000) onlineTimestamps.shift();
                 onlineTimestamps.push(now);
-                const count = onlineTimestamps.length;
-                document.getElementById('liveViewCount').textContent = count;
-                
-                const stats = loadStats();
-                stats.onlineNow = count;
-                saveStats(stats);
+                const el = document.getElementById('liveViewCount');
+                if (el) el.textContent = onlineTimestamps.length;
             }
-            
             setInterval(updateOnlineCount, 3000);
-            
-            function simulateOnlineUsers() {
-                const randomExtra = Math.floor(Math.random() * 5) + 1;
-                for (let i = 0; i < randomExtra; i++) {
-                    onlineTimestamps.push(Date.now());
-                }
-                updateOnlineCount();
-            }
-            setInterval(simulateOnlineUsers, 15000);
+            setInterval(() => { for (let i = 0; i < Math.floor(Math.random() * 5) + 1; i++) onlineTimestamps.push(Date.now()); updateOnlineCount(); }, 15000);
 
-            // ===== RENDER STATISTICS =====
             function renderStatistics(stats) {
                 const now = new Date();
                 const today = now.toISOString().split('T')[0];
                 
-                const summaryHTML = `
-                    <div class="stat-card">
-                        <div class="stat-card-icon">📈</div>
-                        <div class="stat-card-value">${stats.last30DaysViews.toLocaleString()}</div>
-                        <div class="stat-card-label">Lượt xem 30 ngày</div>
-                        <div class="stat-card-trend up">🟢 Tự động cập nhật</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-icon">🏆</div>
-                        <div class="stat-card-value">${stats.totalViews.toLocaleString()}</div>
-                        <div class="stat-card-label">Tổng lượt xem tích lũy</div>
-                        <div class="stat-card-trend up">▲ Nhận dạng tự động</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-icon">📅</div>
-                        <div class="stat-card-value">${stats.todayViews.toLocaleString()}</div>
-                        <div class="stat-card-label">Hôm nay (${today})</div>
-                        <div class="stat-card-trend up">🟢 Đang theo dõi</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-icon">👥</div>
-                        <div class="stat-card-value">${stats.totalUniqueVisitors.toLocaleString()}</div>
-                        <div class="stat-card-label">Người dùng duy nhất</div>
-                        <div class="stat-card-trend up">✅ Nhận dạng 100%</div>
-                    </div>
+                document.getElementById('statSummaryCards').innerHTML = `
+                    <div class="stat-card"><div class="stat-card-icon">📈</div><div class="stat-card-value">${stats.last30DaysViews.toLocaleString()}</div><div class="stat-card-label">Lượt xem 30 ngày</div><div class="stat-card-trend up">🟢 Tự động</div></div>
+                    <div class="stat-card"><div class="stat-card-icon">🏆</div><div class="stat-card-value">${stats.totalViews.toLocaleString()}</div><div class="stat-card-label">Tổng lượt xem</div><div class="stat-card-trend up">▲ Tích lũy</div></div>
+                    <div class="stat-card"><div class="stat-card-icon">📅</div><div class="stat-card-value">${stats.todayViews.toLocaleString()}</div><div class="stat-card-label">Hôm nay</div><div class="stat-card-trend up">🟢 Live</div></div>
+                    <div class="stat-card"><div class="stat-card-icon">👥</div><div class="stat-card-value">${stats.totalUniqueVisitors.toLocaleString()}</div><div class="stat-card-label">Người dùng</div><div class="stat-card-trend up">✅ Unique</div></div>
                 `;
-                document.getElementById('statSummaryCards').innerHTML = summaryHTML;
 
                 const maxMonthly = Math.max(...Object.values(stats.monthlyViews), 1);
                 const currentYear = String(now.getFullYear());
                 const yearData = stats.yearlyViews[currentYear] || { Q1: 0, Q2: 0, Q3: 0, Q4: 0 };
                 const maxQuarterly = Math.max(yearData.Q1, yearData.Q2, yearData.Q3, yearData.Q4, 1);
                 
-                const recentMonths = [];
+                let recentMonths = '';
                 for (let i = 6; i >= 0; i--) {
                     const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
                     const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
-                    const monthNames = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 
-                                       'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
-                    recentMonths.push({
-                        label: `${monthNames[d.getMonth()]}/${d.getFullYear()}`,
-                        value: stats.monthlyViews[key] || 0
-                    });
+                    const monthNames = ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+                    const val = stats.monthlyViews[key] || 0;
+                    recentMonths += `<div class="stat-row"><span class="stat-row-label">${monthNames[d.getMonth()]}/${d.getFullYear()}</span><span class="stat-row-value">${val.toLocaleString()}</span></div><div class="stat-bar-container"><div class="stat-bar-fill" style="width:${val/maxMonthly*100}%"></div></div>`;
                 }
                 
-                const detailHTML = `
-                    <div class="stat-detail-card">
-                        <h4>📊 Lượt xem theo thời gian</h4>
-                        <div class="stat-row">
-                            <span class="stat-row-label">Hôm nay</span>
-                            <span class="stat-row-value">${stats.todayViews.toLocaleString()}</span>
-                        </div>
-                        <div class="stat-bar-container"><div class="stat-bar-fill" style="width:${Math.min((stats.todayViews / Math.max(stats.todayViews, 1)) * 100, 100)}%"></div></div>
-                        <div class="stat-row">
-                            <span class="stat-row-label">7 ngày qua</span>
-                            <span class="stat-row-value">${stats.last7DaysViews.toLocaleString()}</span>
-                        </div>
-                        <div class="stat-bar-container"><div class="stat-bar-fill" style="width:${Math.min((stats.last7DaysViews / Math.max(stats.last7DaysViews, 1)) * 100, 100)}%"></div></div>
-                        <div class="stat-row">
-                            <span class="stat-row-label">30 ngày qua</span>
-                            <span class="stat-row-value">${stats.last30DaysViews.toLocaleString()}</span>
-                        </div>
-                        <div class="stat-bar-container"><div class="stat-bar-fill" style="width:${Math.min((stats.last30DaysViews / Math.max(stats.last30DaysViews, 1)) * 100, 100)}%"></div></div>
-                        <div class="stat-row">
-                            <span class="stat-row-label">Tổng tích lũy</span>
-                            <span class="stat-row-value">${stats.totalViews.toLocaleString()}</span>
-                        </div>
-                        <div class="stat-bar-container"><div class="stat-bar-fill" style="width:100%"></div></div>
+                document.getElementById('statDetailGrid').innerHTML = `
+                    <div class="stat-detail-card"><h4>📊 Lượt xem</h4>
+                        <div class="stat-row"><span class="stat-row-label">Hôm nay</span><span class="stat-row-value">${stats.todayViews.toLocaleString()}</span></div><div class="stat-bar-container"><div class="stat-bar-fill" style="width:100%"></div></div>
+                        <div class="stat-row"><span class="stat-row-label">7 ngày</span><span class="stat-row-value">${stats.last7DaysViews.toLocaleString()}</span></div>
+                        <div class="stat-row"><span class="stat-row-label">30 ngày</span><span class="stat-row-value">${stats.last30DaysViews.toLocaleString()}</span></div>
+                        <div class="stat-row"><span class="stat-row-label">Tổng</span><span class="stat-row-value">${stats.totalViews.toLocaleString()}</span></div>
                     </div>
-                    <div class="stat-detail-card">
-                        <h4>📅 Lượt xem theo năm ${currentYear}</h4>
-                        ${['Q1','Q2','Q3','Q4'].map(q => `
-                            <div class="stat-row">
-                                <span class="stat-row-label">${q === 'Q1' ? 'Quý 1 (T1-T3)' : q === 'Q2' ? 'Quý 2 (T4-T6)' : q === 'Q3' ? 'Quý 3 (T7-T9)' : 'Quý 4 (T10-T12)'}</span>
-                                <span class="stat-row-value">${(yearData[q] || 0).toLocaleString()}</span>
-                            </div>
-                            <div class="stat-bar-container"><div class="stat-bar-fill" style="width:${(yearData[q] || 0) / maxQuarterly * 100}%"></div></div>
-                        `).join('')}
+                    <div class="stat-detail-card"><h4>📅 Năm ${currentYear}</h4>
+                        ${['Q1','Q2','Q3','Q4'].map(q => `<div class="stat-row"><span class="stat-row-label">${q==='Q1'?'Quý 1':q==='Q2'?'Quý 2':q==='Q3'?'Quý 3':'Quý 4'}</span><span class="stat-row-value">${(yearData[q]||0).toLocaleString()}</span></div><div class="stat-bar-container"><div class="stat-bar-fill" style="width:${(yearData[q]||0)/maxQuarterly*100}%"></div></div>`).join('')}
                     </div>
-                    <div class="stat-detail-card">
-                        <h4>📆 Lượt xem theo tháng</h4>
-                        ${recentMonths.map(m => `
-                            <div class="stat-row">
-                                <span class="stat-row-label">${m.label}</span>
-                                <span class="stat-row-value">${m.value.toLocaleString()}</span>
-                            </div>
-                            <div class="stat-bar-container"><div class="stat-bar-fill" style="width:${m.value / maxMonthly * 100}%"></div></div>
-                        `).join('')}
-                    </div>
-                    <div class="stat-detail-card">
-                        <h4>⭐ Bài viết nổi bật</h4>
-                        ${stats.topPosts.map((p, i) => `
-                            <div class="stat-row">
-                                <span class="stat-row-label">${p.title}</span>
-                                <span class="stat-row-value">${p.views.toLocaleString()} views</span>
-                            </div>
-                        `).join('')}
-                    </div>
+                    <div class="stat-detail-card"><h4>📆 Theo tháng</h4>${recentMonths}</div>
+                    <div class="stat-detail-card"><h4>⭐ Nổi bật</h4>${stats.topPosts.map(p => `<div class="stat-row"><span class="stat-row-label">${p.title}</span><span class="stat-row-value">${p.views.toLocaleString()}</span></div>`).join('')}</div>
                 `;
-                document.getElementById('statDetailGrid').innerHTML = detailHTML;
-                
-                document.getElementById('statLastUpdate').textContent = 
-                    '🕒 Cập nhật: ' + now.toLocaleTimeString('vi-VN') + ' - ' + now.toLocaleDateString('vi-VN');
+                document.getElementById('statLastUpdate').textContent = '🕒 ' + now.toLocaleTimeString('vi-VN') + ' - ' + now.toLocaleDateString('vi-VN');
             }
 
-            // ===== REFRESH STATISTICS DISPLAY =====
             window.refreshStatisticsDisplay = function() {
-                const stats = loadStats();
-                renderStatistics(stats);
+                renderStatistics(loadStats());
                 smartStorage.updateStorageIndicator();
             };
 
@@ -1311,23 +1194,12 @@
                 setTimeout(() => {
                     introScreen.classList.add('hidden');
                     mainContent.classList.add('visible');
-                    
-                    // TỰ ĐỘNG nhận dạng và track page view
-                    const stats = autoTrackPageView();
-                    
-                    // Cập nhật online count
+                    autoTrackPageView();
                     updateOnlineCount();
-                    
-                    // Hiển thị thống kê
-                    if (document.getElementById('page-statistics').classList.contains('active')) {
-                        renderStatistics(stats);
-                    }
-                    
-                    // Cập nhật storage indicator
                     smartStorage.updateStorageIndicator();
                     
-                    // Log trạng thái
-                    console.log('✅ SmartStorage đã sẵn sàng:', smartStorage.getStatus());
+                    // Render OB updates
+                    renderOBUpdates();
                 }, 2800);
             });
 
@@ -1348,12 +1220,9 @@
                 hamburgerBtn.classList.remove('active');
                 document.body.style.overflow = '';
             }
-            hamburgerBtn.addEventListener('click', () => {
-                if (sidebarNav.classList.contains('active')) closeSidebar();
-                else openSidebar();
-            });
+            hamburgerBtn.addEventListener('click', () => sidebarNav.classList.contains('active') ? closeSidebar() : openSidebar());
             sidebarOverlay.addEventListener('click', closeSidebar);
-            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSidebar(); });
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
 
             // ===== NAVIGATION =====
             window.navigateTo = function(page) {
@@ -1365,27 +1234,19 @@
                 const navLink = document.querySelector(`[data-nav="${page}"]`);
                 if (navLink) navLink.classList.add('active');
                 
-                if (page === 'statistics') {
-                    const stats = loadStats();
-                    renderStatistics(stats);
-                    smartStorage.updateStorageIndicator();
-                }
+                if (page === 'statistics') renderStatistics(loadStats());
+                if (page === 'ob-update') { renderOBUpdates(); updateOBCountdowns(); }
                 
                 closeSidebar();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             };
 
-            // ===== COLLAPSIBLE SECTIONS =====
+            // ===== COLLAPSIBLE =====
             window.toggleCollapse = function(sectionId) {
                 const content = document.getElementById(sectionId);
                 const icon = document.getElementById(sectionId + 'Icon');
-                if (content.classList.contains('show')) {
-                    content.classList.remove('show');
-                    if (icon) icon.classList.remove('open');
-                } else {
-                    content.classList.add('show');
-                    if (icon) icon.classList.add('open');
-                }
+                if (content.classList.contains('show')) { content.classList.remove('show'); if (icon) icon.classList.remove('open'); }
+                else { content.classList.add('show'); if (icon) icon.classList.add('open'); }
             };
 
             // ===== SERVER SELECTION =====
@@ -1413,7 +1274,6 @@
             let isTranslated = false;
             let currentRawJsonString = '';
 
-            // ===== ICON SECTION =====
             const iconInput = document.getElementById('iconInput');
             const fetchIconBtn = document.getElementById('fetchIconBtn');
             const iconDisplay = document.getElementById('iconDisplay');
@@ -1446,12 +1306,10 @@
                 if (obj === null || obj === undefined) return obj;
                 if (typeof obj === 'string') return translationDict[obj] || obj;
                 if (typeof obj === 'boolean' || typeof obj === 'number') return obj;
-                if (Array.isArray(obj)) return obj.map(item => translateObject(item));
+                if (Array.isArray(obj)) return obj.map(translateObject);
                 if (typeof obj === 'object') {
                     const result = {};
-                    for (const [key, value] of Object.entries(obj)) {
-                        result[translationDict[key] || key] = translateObject(value);
-                    }
+                    for (const [key, value] of Object.entries(obj)) result[translationDict[key] || key] = translateObject(value);
                     return result;
                 }
                 return obj;
@@ -1479,17 +1337,12 @@
 
             async function handleCopy() {
                 if (!currentRawJsonString) { showToast('⚠️ Không có dữ liệu!'); return; }
-                try {
-                    await navigator.clipboard.writeText(currentRawJsonString);
-                    showToast('✅ Đã sao chép!');
-                } catch {
+                try { await navigator.clipboard.writeText(currentRawJsonString); showToast('✅ Đã sao chép!'); }
+                catch {
                     const ta = document.createElement('textarea');
                     ta.value = currentRawJsonString;
                     ta.style.cssText = 'position:fixed;left:-9999px';
-                    document.body.appendChild(ta);
-                    ta.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(ta);
+                    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
                     showToast('✅ Đã sao chép!');
                 }
             }
@@ -1497,9 +1350,7 @@
             function formatTimestamp(ts) {
                 if (!ts) return '--';
                 try {
-                    let d;
-                    if (ts.toString().length > 10) d = new Date(ts);
-                    else d = new Date(ts * 1000);
+                    let d = ts.toString().length > 10 ? new Date(ts) : new Date(ts * 1000);
                     if (isNaN(d.getTime())) return '--';
                     return d.toLocaleString('vi-VN', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'});
                 } catch { return '--'; }
@@ -1508,10 +1359,8 @@
             function updateRegionInfo(data, region) {
                 if (!data) { regionInfoBox.style.display = 'none'; return; }
                 regionInfoBox.style.display = 'flex';
-                const ca = data.accountInfo?.createAt || data.basicInfo?.createAt || data.createAt;
-                createAtDisplay.textContent = formatTimestamp(ca);
-                const ll = data.accountInfo?.lastLoginAt || data.basicInfo?.lastLoginAt || data.lastLoginAt;
-                lastLoginDisplay.textContent = formatTimestamp(ll);
+                createAtDisplay.textContent = formatTimestamp(data.accountInfo?.createAt || data.basicInfo?.createAt || data.createAt);
+                lastLoginDisplay.textContent = formatTimestamp(data.accountInfo?.lastLoginAt || data.basicInfo?.lastLoginAt || data.lastLoginAt);
                 regionNameDisplay.textContent = regionNames[region] || region.toUpperCase();
             }
 
@@ -1532,11 +1381,9 @@
                 translateBtn.disabled = true; copyBtn.disabled = true;
                 regionInfoBox.style.display = 'none';
                 
-                // Kiểm tra cache trong secondary storage
                 const cacheKey = `api_cache_${uid}_${region}`;
                 const cachedData = smartStorage.getSecondaryItem(cacheKey);
-                if (cachedData && (Date.now() - cachedData.cachedAt) < 30 * 60 * 1000) { // Cache 30 phút
-                    console.log('📦 Sử dụng dữ liệu cache từ SmartStorage');
+                if (cachedData && (Date.now() - cachedData.cachedAt) < 30 * 60 * 1000) {
                     currentData = cachedData.data;
                     displayData(currentData, false);
                     updateRegionInfo(currentData, region);
@@ -1552,14 +1399,8 @@
                     if (!data || Object.keys(data).length === 0) throw new Error('Không tìm thấy thông tin.');
                     currentData = data;
                     
-                    // Lưu cache
                     window._currentApiData = { uid, region, data };
-                    smartStorage.saveSecondaryData(cacheKey, {
-                        data: data,
-                        uid: uid,
-                        region: region,
-                        cachedAt: Date.now()
-                    });
+                    smartStorage.saveSecondaryData(cacheKey, { data, uid, region, cachedAt: Date.now() });
                     
                     displayData(data, false);
                     updateRegionInfo(data, region);
@@ -1575,16 +1416,9 @@
 
             function handleSearch() {
                 const uid = uidInput.value.trim();
-                if (!uid || !/^\d+$/.test(uid)) {
-                    jsonOutput.innerHTML = '<div class="error-message">⚠️ Vui lòng nhập UID hợp lệ (chỉ chứa số).</div>';
-                    regionInfoBox.style.display = 'none';
-                    return;
-                }
+                if (!uid || !/^\d+$/.test(uid)) { jsonOutput.innerHTML = '<div class="error-message">⚠️ Vui lòng nhập UID hợp lệ.</div>'; regionInfoBox.style.display = 'none'; return; }
                 const region = regionSelect.value;
-                document.querySelectorAll('.server-btn').forEach(b => {
-                    b.classList.remove('active');
-                    if (b.dataset.region === region) b.classList.add('active');
-                });
+                document.querySelectorAll('.server-btn').forEach(b => { b.classList.remove('active'); if (b.dataset.region === region) b.classList.add('active'); });
                 fetchData(uid, region);
             }
 
@@ -1594,13 +1428,9 @@
                 else { displayData(currentData, true); translateBtn.textContent = '🔄 Hiển thị gốc'; }
             }
 
-            // Icon functions
             function displayIcon(itemId) {
                 iconDisplay.innerHTML = '<div class="loading">⏳ Đang tải Icon ...</div>';
-                if (!itemId || !/^\d+$/.test(itemId)) {
-                    iconDisplay.innerHTML = '<div class="error-message">⚠️ ID Item không hợp lệ.</div>';
-                    return;
-                }
+                if (!itemId || !/^\d+$/.test(itemId)) { iconDisplay.innerHTML = '<div class="error-message">⚠️ ID Item không hợp lệ.</div>'; return; }
                 const url = `https://dl-freefiredth-icons.onrender.com/ff/images/${encodeURIComponent(itemId)}`;
                 const img = document.createElement('img');
                 img.src = url; img.alt = `Icon ${itemId}`;
@@ -1612,9 +1442,7 @@
                     lbl.className = 'icon-id'; lbl.textContent = `📌 ID: ${itemId}`;
                     iconDisplay.appendChild(lbl);
                 };
-                img.onerror = () => {
-                    iconDisplay.innerHTML = `<div class="error-message">❌ Không tìm thấy Icon: ${itemId}</div>`;
-                };
+                img.onerror = () => { iconDisplay.innerHTML = `<div class="error-message">❌ Không tìm thấy Icon: ${itemId}</div>`; };
                 iconDisplay.innerHTML = '';
                 iconDisplay.appendChild(img);
             }
@@ -1625,7 +1453,7 @@
                 displayIcon(id);
             }
 
-            // Events
+            // Event listeners
             fetchBtn.addEventListener('click', handleSearch);
             translateBtn.addEventListener('click', handleTranslate);
             copyBtn.addEventListener('click', handleCopy);
@@ -1633,45 +1461,30 @@
             fetchIconBtn.addEventListener('click', handleIconSearch);
             iconInput.addEventListener('keypress', e => { if (e.key === 'Enter') { e.preventDefault(); handleIconSearch(); } });
 
-            // Storage indicator click event
             document.getElementById('storageIndicator').addEventListener('click', () => {
-                const status = smartStorage.getStatus();
-                const info = `
-🧹 Dọn dẹp dữ liệu cũ...
-📊 Trạng thái hiện tại:
-- Dung lượng: ${smartStorage.formatSize(status.totalSize)} / ${smartStorage.formatSize(status.maxSize)}
-- Sử dụng: ${status.usagePercent}%
-- Dữ liệu chính: ${status.primaryItems} mục
-- Dữ liệu phụ: ${status.secondaryItems} mục
-                `.trim();
-                
                 const cleaned = smartStorage.performCleanup();
                 showToast(`✅ Đã dọn dẹp ${cleaned} mục dữ liệu cũ!`);
-                console.log(info);
             });
 
             // Auto load
             setTimeout(() => {
-                fetchData(uidInput.value.trim() || '26408047', regionSelect.value);
-                displayIcon(iconInput.value.trim() || '710049012');
-                
-                const stats = loadStats();
-                if (document.getElementById('page-statistics').classList.contains('active')) {
-                    renderStatistics(stats);
-                }
-                
+                fetchData('202417222', regionSelect.value);
+                displayIcon('710049012');
+                if (document.getElementById('page-statistics').classList.contains('active')) renderStatistics(loadStats());
+                renderOBUpdates();
                 smartStorage.updateStorageIndicator();
             }, 3000);
 
-            // Tự động refresh thống kê mỗi 30 giây
+            // Update countdowns every second
+            setInterval(updateOBCountdowns, 1000);
+
+            // Auto refresh statistics
             setInterval(() => {
-                if (document.getElementById('page-statistics').classList.contains('active')) {
-                    const stats = loadStats();
-                    renderStatistics(stats);
+                if (document.getElementById('page-statistics') && document.getElementById('page-statistics').classList.contains('active')) {
+                    renderStatistics(loadStats());
                 }
             }, 30000);
 
-            // ===== TRACK PAGE VIEW khi chuyển trang hoặc focus =====
             document.addEventListener('visibilitychange', () => {
                 if (document.visibilityState === 'visible') {
                     autoTrackPageView();
@@ -1680,20 +1493,11 @@
                 }
             });
 
-            // ===== DỌN DẸP ĐỊNH KỲ (mỗi 30 phút) =====
-            setInterval(() => {
-                smartStorage.performCleanup();
-            }, 30 * 60 * 1000);
+            setInterval(() => smartStorage.performCleanup(), 30 * 60 * 1000);
 
-            // Log trạng thái khởi tạo
-            console.log('🎯 Hệ thống SmartStorage đã được tích hợp thành công!');
-            console.log('📋 Tính năng:');
-            console.log('  ✅ Lưu trữ dữ liệu trong localStorage');
-            console.log('  ✅ Tự động dọn dẹp dữ liệu cũ (>60 ngày)');
-            console.log('  ✅ Tự động xóa dữ liệu phụ khi đầy bộ nhớ');
-            console.log('  ✅ Bảo vệ dữ liệu chính (thống kê)');
-            console.log('  ✅ Cache API response (30 phút)');
-            console.log('  ✅ Chỉ báo trạng thái bộ nhớ');
+            console.log('🎯 [FFVN.TGM] Hệ thống đã khởi tạo!');
+            console.log('📋 Tính năng: FF Info | Statistics | VQ Info | OB Updates | Timezone Table');
+            console.log('🔄 OB Countdown tự động cập nhật mỗi giây');
 
         })();
     </script>
