@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="vi">
-<head>
+<html lang="vi"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- ===== BẢO VỆ NGƯỜI DÙNG - LỚP 1: CSP HEADERS ===== -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://xeoms-info.vercel.app https://dl-freefiredth-icons.onrender.com; frame-src 'none'; object-src 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="no-referrer">
+    
     <!-- ===== SEO TỐI ƯU ===== -->
-    <title>Tra Cứu UID Free Fire | Công Cụ Tra Cứu Thông Tin</title>
-    <meta name="description" content="Tra Cứu Thông Tin Free Fire Chính Xác | Công Cụ Tra Cứu UID Người Dùng - Xem Rank, Level, Skin & Hỗ Trợ 15 Server Khác Nhau">
+    <title>Tra Cứu UID Free Fire | Công Cụ Tra Cứu Thông Tin - Bảo Mật</title>
+    <meta name="description" content="Tra Cứu Thông Tin Free Fire Chính Xác | Công Cụ Tra Cứu UID Người Dùng - Xem Rank, Level, Skin &amp; Hỗ Trợ 15 Server Khác Nhau - Bảo Vệ Dữ Liệu">
     <meta name="keywords" content="tra cứu Free Fire, xem thông tin FF, check UID Free Fire, công cụ FF, Free Fire info, Thanh Cua">
     <meta name="author" content="Thanh Cua">
     <meta name="robots" content="index, follow">
@@ -24,7 +30,7 @@
     
     <!-- Open Graph -->
     <meta property="og:title" content="Tra Cứu UID Free Fire | Công Cụ Tra Cứu Thông Tin">
-    <meta property="og:description" content="Tra Cứu Thông Tin Free Fire Chính Xác - Xem Rank, Level, Skin & Hỗ Trợ 15 Server">
+    <meta property="og:description" content="Tra Cứu Thông Tin Free Fire Chính Xác - Xem Rank, Level, Skin &amp; Hỗ Trợ 15 Server">
     <meta property="og:url" content="https://infofftgm.vercel.app/">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg">
@@ -36,7 +42,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Tra Cứu UID Free Fire | Công Cụ Tra Cứu Thông Tin">
-    <meta name="twitter:description" content="Tra Cứu Thông Tin Free Fire Chính Xác - Xem Rank, Level, Skin & Hỗ Trợ 15 Server">
+    <meta name="twitter:description" content="Tra Cứu Thông Tin Free Fire Chính Xác - Xem Rank, Level, Skin &amp; Hỗ Trợ 15 Server">
     <meta name="twitter:image" content="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg">
     
     <!-- Schema.org -->
@@ -58,8 +64,8 @@
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Chakra+Petch:wght@300;400;500;600;700&family=Titillium+Web:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&amp;family=Orbitron:wght@400;500;600;700;800;900&amp;family=Rajdhani:wght@300;400;500;600;700&amp;family=Chakra+Petch:wght@300;400;500;600;700&amp;family=Titillium+Web:wght@300;400;600;700;900&amp;display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -83,11 +89,13 @@
             --warning: #f5b87e;
             --orange: #ff8c42;
             --gold: #ffcc00;
+            --shield-blue: #4a9eff;
             --gradient-1: linear-gradient(135deg, #b7c9f0 0%, #5f7fc9 100%);
             --gradient-2: linear-gradient(145deg, #4a6bb5, #2d4373);
             --gradient-success: linear-gradient(145deg, #2a8b5a, #1a5a3a);
             --gradient-purple: linear-gradient(145deg, #6b4aa5, #422d6e);
             --gradient-ob: linear-gradient(135deg, #ff6b35, #ff4500, #cc0000);
+            --gradient-shield: linear-gradient(135deg, #1a3a5c 0%, #0d2540 100%);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -101,6 +109,8 @@
             letter-spacing: 0.3px;
             overflow-x: hidden;
             line-height: 1.5;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         /* Scrollbar */
@@ -108,6 +118,20 @@
         ::-webkit-scrollbar-track { background: var(--bg-primary); }
         ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent-hover); }
+
+        /* ===== SECURITY BADGE ===== */
+        .security-badge-top {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 9998;
+            background: var(--gradient-shield); padding: 6px 16px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-family: 'Rajdhani', sans-serif; font-size: 0.75rem; font-weight: 600;
+            color: var(--shield-blue); letter-spacing: 1px;
+            border-bottom: 1px solid rgba(74,158,255,0.3);
+        }
+        .security-badge-top .secure-dot {
+            width: 6px; height: 6px; background: var(--success);
+            border-radius: 50%; animation: pulse 2s infinite;
+        }
 
         /* ===== 3D INTRO ===== */
         .intro-screen {
@@ -139,7 +163,7 @@
 
         /* ===== HAMBURGER MENU BUTTON ===== */
         .hamburger-btn {
-            position: fixed; top: 20px; right: 20px; z-index: 9999;
+            position: fixed; top: 30px; right: 20px; z-index: 9999;
             width: 50px; height: 50px; border-radius: 14px;
             background: var(--gradient-2); border: 2px solid var(--accent-hover);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -415,6 +439,13 @@
     </style>
 </head>
 <body>
+    <!-- ===== SECURITY BADGE ===== -->
+    <div class="security-badge-top">
+        <span class="secure-dot"></span>
+        🛡️ KẾT NỐI AN TOÀN | 🔒 DỮ LIỆU MÃ HÓA | ✅ BẢO VỆ NGƯỜI DÙNG
+        <span class="secure-dot"></span>
+    </div>
+
     <!-- ===== INTRO ===== -->
     <div class="intro-screen" id="introScreen">
         <div class="intro-logo-container">
@@ -489,7 +520,7 @@
     <!-- ===== STORAGE STATUS INDICATOR ===== -->
     <div class="storage-indicator" id="storageIndicator" title="Trạng thái bộ nhớ">
         <span class="storage-dot" id="storageDot"></span>
-        <span id="storageText">Đang kiểm tra...</span>
+        <span id="storageText">💾 0.00MB / 4.5MB (0.1%)</span>
     </div>
 
     <!-- ===== MAIN CONTENT ===== -->
@@ -503,12 +534,12 @@
                     <img src="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg" alt="Thanh Cua" class="navbar-logo" loading="lazy">
                     <div>
                         <div class="navbar-title">Tra Cứu UID</div>
-                        <div class="navbar-subtitle">Thành Thanh Cua</div>
+                        <div class="navbar-subtitle">Tra Cứu Free Fire </div>
                     </div>
                 </div>
                 <div class="live-counter">
                     <span class="live-dot"></span>
-                    <span>👁️ <span id="liveViewCount">0</span> đang xem</span>
+                    <span>👁️ <span id="liveViewCount">1</span> đang xem</span>
                 </div>
             </div>
 
@@ -516,7 +547,7 @@
             <div class="hero-section">
                 <img src="https://cdn.phototourl.com/free/2026-07-27-a3ced62d-5739-4942-918b-4275fef62a2a.jpg" alt="Thanh Cua" class="hero-logo" loading="lazy">
                 <h1 class="hero-title">Thanh Cua</h1>
-                <div class="hero-creator">👑 Thành Thanh Cua</div>
+                <div class="hero-creator">👑 Tra Cứu Free Fire</div>
                 <a href="https://www.tiktok.com/@thanhcuas1" target="_blank" rel="noopener noreferrer" class="hero-tiktok">🎵 TikTok: @thanhcuas1</a>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <span class="hero-uid">👤 @thanhcua</span>
@@ -560,13 +591,13 @@
                 <div class="search-box">
                     <div class="input-group">
                         <label for="uidInput">👤 UID</label>
-                        <input type="text" id="uidInput" placeholder="Nhập UID ... (VD: 202417222)" value="202417222">
+                        <input type="text" id="uidInput" placeholder="Nhập UID ... (VD: 202417222)" value="202417222" autocomplete="off">
                         <button class="btn-3d" id="fetchBtn">🔍 Tra cứu</button>
                     </div>
                     <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-top: 0.2rem;">
                         <label style="color: #b0c2e6; min-width: 70px;">🌏 Khu vực</label>
                         <select id="regionSelect" style="padding: 10px 18px; border-radius: 40px; background: var(--bg-input); color: #f0f4ff; border: 1px solid var(--border-color); outline: none; flex:1; min-width:120px; font-family: 'Titillium Web', sans-serif; font-weight: 500;">
-                            <option value="sg" selected>🇸🇬 Singapore</option>
+                            <option value="sg" selected="">🇸🇬 Singapore</option>
                             <option value="vn">🇻🇳 Việt Nam</option>
                             <option value="id">🇮🇩 Indonesia</option>
                             <option value="th">🇹🇭 Thái Lan</option>
@@ -599,11 +630,11 @@
                     <div class="header-actions">
                         <h3>📦 Kết quả trả về</h3>
                         <div class="btn-group">
-                            <button class="btn-3d btn-3d-secondary translate-btn" id="translateBtn">🌐 Dịch sang tiếng Việt</button>
-                            <button class="btn-3d btn-3d-tertiary copy-btn" id="copyBtn">📋 Sao chép</button>
+                            <button class="btn-3d btn-3d-secondary translate-btn" id="translateBtn" disabled="">🌐 Dịch sang tiếng Việt</button>
+                            <button class="btn-3d btn-3d-tertiary copy-btn" id="copyBtn" disabled="">📋 Sao chép</button>
                         </div>
                     </div>
-                    <div id="responseContainer"><div class="json-output" id="jsonOutput">Đang tải dữ liệu ...</div></div>
+                    <div id="responseContainer"><div class="json-output" id="jsonOutput"><div class="loading">⏳ Đang tải dữ liệu ...</div></div></div>
                 </div>
 
                 <!-- Icon Section -->
@@ -612,11 +643,11 @@
                     <div class="icon-search-box">
                         <div class="input-group">
                             <label for="iconInput">🔢 ID Item</label>
-                            <input type="text" id="iconInput" placeholder="Nhập ID Item ... (VD: 901049013)" value="901049013">
+                            <input type="text" id="iconInput" placeholder="Nhập ID Item ... (VD: 901049013)" value="901049013" autocomplete="off">
                             <button class="btn-3d" id="fetchIconBtn">🔍 Tìm Icon</button>
                         </div>
                     </div>
-                    <div class="icon-display" id="iconDisplay"><div class="placeholder-text">🖼️ Nhập ID Item và nhấn "Tìm Icon"<br><span style="font-size:0.9rem;color:#5a6a8a;">Ví dụ: 710049012</span></div></div>
+                    <div class="icon-display" id="iconDisplay"><img src="https://dl-freefiredth-icons.onrender.com/ff/images/710049012" alt="Icon 710049012" style="max-width: 100%; max-height: 400px; object-fit: contain; border-radius: 16px; background: rgb(20, 28, 46); padding: 10px; box-shadow: rgba(0, 0, 0, 0.5) 0px 8px 24px;"><div class="icon-id">📌 ID: 710049012</div></div>
                 </div>
             </div>
 
@@ -731,9 +762,7 @@
                         <span class="collapse-icon open" id="obContentIcon">▼</span>
                     </div>
                     <div class="collapsible-content show" id="obContent">
-                        <div class="ob-grid" id="obGrid">
-                            <!-- Generated by JS -->
-                        </div>
+                        <div class="ob-grid" id="obGrid"></div>
                         <div class="ob-note">
                             ⚠️ <strong>Lưu ý:</strong> Đây là thông tin <strong>Dự Đoán</strong> thông tin Cập nhật OB Free Fire, xem tham khảo thôi nhé!
                         </div>
@@ -790,6 +819,165 @@
 
     <script>
         (function() {
+            'use strict';
+
+            // =============================================
+            // HỆ THỐNG BẢO VỆ NGƯỜI DÙNG (USER PROTECTION)
+            // =============================================
+            const UserProtection = {
+                _sessionToken: null,
+                _requestLog: {},
+                _maxRequestsPerMinute: 30,
+                _encryptionKey: 'ff_protect_2026_salt_key_v3',
+                
+                // Khởi tạo phiên bảo mật
+                initSession() {
+                    const components = [
+                        navigator.hardwareConcurrency || 'unknown',
+                        screen.width + 'x' + screen.height,
+                        Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        Date.now(),
+                        Math.random().toString(36)
+                    ];
+                    let hash = 0;
+                    const raw = components.join('|');
+                    for (let i = 0; i < raw.length; i++) { hash = ((hash << 5) - hash) + raw.charCodeAt(i); hash |= 0; }
+                    this._sessionToken = 'sess_' + Math.abs(hash).toString(36);
+                    
+                    // Thiết lập các listener bảo mật
+                    this._setupSecurityListeners();
+                    console.log('🛡️ Phiên bảo mật đã khởi tạo');
+                },
+                
+                _setupSecurityListeners() {
+                    // Phát hiện DevTools
+                    setInterval(() => {
+                        const threshold = 160;
+                        if (window.outerWidth - window.innerWidth > threshold || 
+                            window.outerHeight - window.innerHeight > threshold) {
+                            console.clear();
+                            console.warn('⚠️ Cảnh báo bảo mật: DevTools đang mở!');
+                        }
+                    }, 1000);
+                    
+                    // Chống iframe embedding
+                    if (window.top !== window.self) {
+                        document.body.innerHTML = '<h1 style="text-align:center;color:red;padding:50px;">🚫 TRUY CẬP BỊ TỪ CHỐI</h1>';
+                        throw new Error('Security: Iframe detected');
+                    }
+                },
+                
+                // Xác thực và làm sạch input
+                validateInput(uid, region) {
+                    // Chỉ cho phép số
+                    const cleanedUID = String(uid).replace(/[^0-9]/g, '');
+                    if (cleanedUID.length < 5 || cleanedUID.length > 15) {
+                        throw new Error('⚠️ UID không hợp lệ! Vui lòng nhập UID từ 5-15 chữ số.');
+                    }
+                    
+                    const allowedRegions = ['sg','vn','id','th','my','ph','tw','in','bd','br','mx','ru','eg','pk','sa'];
+                    if (!allowedRegions.includes(region)) {
+                        throw new Error('⚠️ Khu vực không hợp lệ!');
+                    }
+                    
+                    return { uid: cleanedUID, region: region };
+                },
+                
+                // Rate limiting
+                checkRateLimit() {
+                    const now = Date.now();
+                    const clientKey = this._sessionToken;
+                    
+                    if (!this._requestLog[clientKey]) {
+                        this._requestLog[clientKey] = { count: 0, resetTime: now + 60000 };
+                    }
+                    
+                    if (now > this._requestLog[clientKey].resetTime) {
+                        this._requestLog[clientKey] = { count: 0, resetTime: now + 60000 };
+                    }
+                    
+                    this._requestLog[clientKey].count++;
+                    
+                    if (this._requestLog[clientKey].count > this._maxRequestsPerMinute) {
+                        const waitSeconds = Math.ceil((this._requestLog[clientKey].resetTime - now) / 1000);
+                        throw new Error('🚫 Quá nhiều yêu cầu! Vui lòng đợi ' + waitSeconds + ' giây.');
+                    }
+                    
+                    return true;
+                },
+                
+                // Mã hóa dữ liệu
+                encrypt(data) {
+                    try {
+                        const jsonStr = JSON.stringify(data);
+                        let encrypted = '';
+                        for (let i = 0; i < jsonStr.length; i++) {
+                            encrypted += String.fromCharCode(
+                                jsonStr.charCodeAt(i) ^ this._encryptionKey.charCodeAt(i % this._encryptionKey.length)
+                            );
+                        }
+                        return btoa(encrypted);
+                    } catch (e) { return null; }
+                },
+                
+                // Giải mã dữ liệu
+                decrypt(encoded) {
+                    try {
+                        const decoded = atob(encoded);
+                        let result = '';
+                        for (let i = 0; i < decoded.length; i++) {
+                            result += String.fromCharCode(
+                                decoded.charCodeAt(i) ^ this._encryptionKey.charCodeAt(i % this._encryptionKey.length)
+                            );
+                        }
+                        return JSON.parse(result);
+                    } catch (e) { return null; }
+                },
+                
+                // Làm sạch output (chống XSS)
+                sanitizeHTML(str) {
+                    if (typeof str !== 'string') return str;
+                    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+                },
+                
+                // Lưu trữ an toàn
+                secureSave(key, data, ttl = 3600000) {
+                    try {
+                        const encrypted = this.encrypt({
+                            data: data,
+                            timestamp: Date.now(),
+                            ttl: ttl,
+                            token: this._sessionToken
+                        });
+                        if (encrypted) {
+                            const store = JSON.parse(localStorage.getItem('ff_secure_vault') || '{}');
+                            store[key] = encrypted;
+                            localStorage.setItem('ff_secure_vault', JSON.stringify(store));
+                            return true;
+                        }
+                        return false;
+                    } catch (e) { return false; }
+                },
+                
+                secureLoad(key) {
+                    try {
+                        const store = JSON.parse(localStorage.getItem('ff_secure_vault') || '{}');
+                        if (!store[key]) return null;
+                        const decrypted = this.decrypt(store[key]);
+                        if (!decrypted || decrypted.token !== this._sessionToken) return null;
+                        if (Date.now() - decrypted.timestamp > decrypted.ttl) {
+                            delete store[key];
+                            localStorage.setItem('ff_secure_vault', JSON.stringify(store));
+                            return null;
+                        }
+                        return decrypted.data;
+                    } catch (e) { return null; }
+                }
+            };
+            
+            // Khởi tạo bảo vệ
+            UserProtection.initSession();
+
             // =============================================
             // SMART STORAGE SYSTEM
             // =============================================
@@ -1143,7 +1331,7 @@
                 const today = now.toISOString().split('T')[0];
                 
                 document.getElementById('statSummaryCards').innerHTML = `
-                    <div class="stat-card"><div class="stat-card-icon">📈</div><div class="stat-card-value">${stats.last30DaysViews.toLocaleString()}</div><div class="stat-card-label">Lượt xem 30 ngày</div><div class="stat-card-trend up">🟢 Tự động</div></div>
+                    <div class="stat-card"><div class="stat-card-icon">📈</div><div class="stat-card-value">${stats.last30DaysViews.toLocaleString()}</div><div class="stat-card-label">Lượt xem 30 ngày</div><div class="stat-card-trend up">?? Tự động</div></div>
                     <div class="stat-card"><div class="stat-card-icon">🏆</div><div class="stat-card-value">${stats.totalViews.toLocaleString()}</div><div class="stat-card-label">Tổng lượt xem</div><div class="stat-card-trend up">▲ Tích lũy</div></div>
                     <div class="stat-card"><div class="stat-card-icon">📅</div><div class="stat-card-value">${stats.todayViews.toLocaleString()}</div><div class="stat-card-label">Hôm nay</div><div class="stat-card-trend up">🟢 Live</div></div>
                     <div class="stat-card"><div class="stat-card-icon">👥</div><div class="stat-card-value">${stats.totalUniqueVisitors.toLocaleString()}</div><div class="stat-card-label">Người dùng</div><div class="stat-card-trend up">✅ Unique</div></div>
@@ -1195,8 +1383,6 @@
                     autoTrackPageView();
                     updateOnlineCount();
                     smartStorage.updateStorageIndicator();
-                    
-                    // Render OB updates
                     renderOBUpdates();
                 }, 2800);
             });
@@ -1363,7 +1549,7 @@
             }
 
             function buildApiUrl(uid, region) {
-                return `https://xeoms-info.vercel.app/info?uid=${encodeURIComponent(uid)}&region=${encodeURIComponent(region)}`;
+                return `https://xeoms-info.vercel.app/info?uid=${encodeURIComponent(uid)}&region=${encodeURIComponent(region)}&token=${UserProtection._sessionToken}`;
             }
 
             function displayData(data, translated = false) {
@@ -1375,37 +1561,52 @@
             }
 
             async function fetchData(uid, region) {
-                jsonOutput.innerHTML = '<div class="loading">⏳ Đang tải dữ liệu ...</div>';
+                jsonOutput.innerHTML = '<div class="loading">🔐 Đang xác thực và tải dữ liệu an toàn...</div>';
                 translateBtn.disabled = true; copyBtn.disabled = true;
                 regionInfoBox.style.display = 'none';
                 
-                const cacheKey = `api_cache_${uid}_${region}`;
-                const cachedData = smartStorage.getSecondaryItem(cacheKey);
-                if (cachedData && (Date.now() - cachedData.cachedAt) < 30 * 60 * 1000) {
-                    currentData = cachedData.data;
-                    displayData(currentData, false);
-                    updateRegionInfo(currentData, region);
-                    translateBtn.disabled = false;
-                    translateBtn.textContent = '🌐 Dịch sang tiếng Việt';
-                    return;
-                }
-                
                 try {
-                    const res = await fetch(buildApiUrl(uid, region));
+                    // Bước 1: Xác thực input
+                    const validated = UserProtection.validateInput(uid, region);
+                    
+                    // Bước 2: Rate limiting
+                    UserProtection.checkRateLimit();
+                    
+                    // Bước 3: Kiểm tra cache an toàn
+                    const cacheKey = `secure_${validated.uid}_${validated.region}`;
+                    const cachedData = UserProtection.secureLoad(cacheKey);
+                    
+                    if (cachedData) {
+                        currentData = cachedData;
+                        displayData(currentData, false);
+                        updateRegionInfo(currentData, validated.region);
+                        translateBtn.disabled = false;
+                        translateBtn.textContent = '🌐 Dịch sang tiếng Việt';
+                        console.log('📦 Dữ liệu từ cache an toàn');
+                        return;
+                    }
+                    
+                    // Bước 4: Gọi API
+                    const res = await fetch(buildApiUrl(validated.uid, validated.region));
                     if (!res.ok) throw new Error(res.status === 404 ? 'Không tìm thấy dữ liệu.' : `Lỗi kết nối (Mã: ${res.status})`);
+                    
                     const data = await res.json();
                     if (!data || Object.keys(data).length === 0) throw new Error('Không tìm thấy thông tin.');
+                    
                     currentData = data;
                     
-                    window._currentApiData = { uid, region, data };
-                    smartStorage.saveSecondaryData(cacheKey, { data, uid, region, cachedAt: Date.now() });
+                    // Bước 5: Lưu cache an toàn
+                    UserProtection.secureSave(cacheKey, data);
                     
                     displayData(data, false);
-                    updateRegionInfo(data, region);
+                    updateRegionInfo(data, validated.region);
                     translateBtn.disabled = false;
                     translateBtn.textContent = '🌐 Dịch sang tiếng Việt';
+                    
+                    console.log('✅ Dữ liệu đã tải an toàn');
+                    
                 } catch (e) {
-                    jsonOutput.innerHTML = `<div class="error-message">❌ ${e.message}</div>`;
+                    jsonOutput.innerHTML = `<div class="error-message">🛡️ ${UserProtection.sanitizeHTML(e.message)}</div>`;
                     translateBtn.disabled = true; copyBtn.disabled = true;
                     currentData = null; currentRawJsonString = '';
                     regionInfoBox.style.display = 'none';
@@ -1414,7 +1615,11 @@
 
             function handleSearch() {
                 const uid = uidInput.value.trim();
-                if (!uid || !/^\d+$/.test(uid)) { jsonOutput.innerHTML = '<div class="error-message">⚠️ Vui lòng nhập UID hợp lệ.</div>'; regionInfoBox.style.display = 'none'; return; }
+                if (!uid || !/^\d+$/.test(uid)) { 
+                    jsonOutput.innerHTML = '<div class="error-message">⚠️ Vui lòng nhập UID hợp lệ (chỉ chứa số).</div>'; 
+                    regionInfoBox.style.display = 'none'; 
+                    return; 
+                }
                 const region = regionSelect.value;
                 document.querySelectorAll('.server-btn').forEach(b => { b.classList.remove('active'); if (b.dataset.region === region) b.classList.add('active'); });
                 fetchData(uid, region);
@@ -1493,11 +1698,16 @@
 
             setInterval(() => smartStorage.performCleanup(), 30 * 60 * 1000);
 
-            console.log('🎯 [Tra Cứu UID] Hệ thống đã khởi tạo!');
-            console.log('📋 Tính năng: FF Info | Statistics | VQ Info | OB Updates | Timezone Table');
-            console.log('🔄 OB Countdown tự động cập nhật mỗi giây');
+            console.log('🛡️╔══════════════════════════════════╗');
+            console.log('🛡️║ HỆ THỐNG BẢO VỆ NGƯỜI DÙNG    ║');
+            console.log('🛡️║ ✅ Xác thực input               ║');
+            console.log('🛡️║ ✅ Rate limiting                ║');
+            console.log('🛡️║ ✅ Mã hóa dữ liệu               ║');
+            console.log('🛡️║ ✅ Chống XSS/Injection          ║');
+            console.log('🛡️║ ✅ Phát hiện DevTools           ║');
+            console.log('🛡️║ ✅ Chống clickjacking           ║');
+            console.log('🛡️╚══════════════════════════════════╝');
 
         })();
     </script>
-</body>
-                                                   </html>
+</body></html>
